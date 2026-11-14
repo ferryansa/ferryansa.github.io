@@ -14,7 +14,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%236366f1'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>F</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -43,8 +43,8 @@
 </nav>
 
 <main id="top">
-<!-- HERO -->
-<header class="hero">
+<!-- ================= HERO ================= -->
+<header class="hero" id="hero">
   <div class="wrap">
     <div>
       <span class="badge"><i class="dot"></i> Open to opportunities &amp; collaboration</span>
@@ -66,149 +66,176 @@
     <div class="term" id="tilt">
       <div class="term-h"><i></i><i></i><i></i><span>ferryansa.py</span></div>
 <pre><span class="k">class</span> <span class="f">Ferryansa</span>:
-    roles = [<span class="s">"Data Analyst"</span>,
-             <span class="s">"Data Engineer"</span>]
-    stack = [<span class="s">"Python"</span>, <span class="s">"SQL"</span>,
-             <span class="s">"Airflow"</span>, <span class="s">"Kibana"</span>]
-    foundation = [<span class="s">"Linux"</span>, <span class="s">"VMware"</span>,
-                  <span class="s">"Ansible"</span>]
+    roles = [<a class="s" href="#projects">"Data Analyst"</a>,
+             <a class="s" href="#projects">"Data Engineer"</a>]
+    stack = [<a class="s" href="#skills" data-skill="Python">"Python"</a>, <a class="s" href="#skills" data-skill="SQL">"SQL"</a>,
+             <a class="s" href="#skills" data-skill="Apache Airflow">"Airflow"</a>, <a class="s" href="#skills" data-skill="Kibana">"Kibana"</a>]
+    foundation = [<a class="s" href="#j-inovasi">"Linux"</a>, <a class="s" href="#j-lion">"VMware"</a>,
+                  <a class="s" href="#j-inovasi">"Ansible"</a>]
 
     <span class="k">def</span> <span class="f">goal</span>(self):
         <span class="c"># accurate, consistent data</span>
         <span class="k">return</span> <span class="s">"insight"</span></pre>
+      <div class="hint">// click any value to jump to it</div>
     </div>
   </div>
+  <a class="scroll" href="#about" aria-label="Scroll down"></a>
 </header>
 
-<!-- ABOUT -->
+<div class="marquee" aria-label="Tech stack — click to see skills"><div class="mq-track" id="marquee"></div></div>
+
+<!-- ================= ABOUT ================= -->
 <section id="about">
   <div class="wrap">
-    <div class="reveal">
+    <div class="head reveal" data-n="01">
       <div class="eyebrow">01 / About</div>
       <h2>From infrastructure to <span class="grad">data</span></h2>
       <p class="sub">Years of running production and disaster-recovery systems taught me why data has to be accurate, consistent, and available. Now I build the pipelines and analysis on top of that foundation.</p>
     </div>
-    <div class="stats reveal">
-      <div class="stat"><b data-count="4" data-suffix="+">0</b><span>Years of IT experience</span></div>
-      <div class="stat"><b data-count="100" data-suffix="+">0</b><span>Virtual machines administered</span></div>
-      <div class="stat"><b data-count="2">0</b><span>Featured data projects</span></div>
-      <div class="stat"><b data-count="7">0</b><span>Certifications &amp; simulations</span></div>
-    </div>
-    <div class="about-grid" style="margin-top:22px">
-      <div class="card reveal"><div class="ic">🔎</div><h3>What I Do</h3>
-        <ul><li>Build data pipelines: PostgreSQL → Airflow → Elasticsearch/Kibana</li><li>Keep data consistent across production and DR systems</li><li>Automate Linux/Windows operations with Bash, Python, and Ansible</li></ul></div>
-      <div class="card reveal"><div class="ic">🌱</div><h3>Currently Learning</h3>
-        <ul><li>Advanced deep learning and NLP</li><li>Real-time data engineering with Apache Airflow</li><li>Distributed processing (Spark, Kafka) &amp; cloud data warehouses</li></ul></div>
-      <div class="card reveal"><div class="ic">🤝</div><h3>Collaboration Interests</h3>
-        <ul><li>End-to-end data solutions, from raw data to production ML models</li><li>Advanced AI &amp; cloud-based data solutions</li><li>Automated workflows for large datasets</li></ul></div>
+    <div class="bento">
+      <a class="card jump b-what reveal" href="#projects">
+        <i class="arr">↗</i>
+        <div class="ic">🔎</div><h3>What I Do</h3>
+        <ul><li>Build data pipelines: PostgreSQL → Airflow → Elasticsearch/Kibana</li><li>Keep data consistent across production and DR systems</li><li>Automate Linux/Windows operations with Bash, Python, and Ansible</li></ul>
+      </a>
+      <a class="card jump stat reveal" href="#experience"><i class="arr">↗</i><span class="ic">⏱️</span><b data-count="4" data-suffix="+">0</b><span class="l">Years of IT experience</span></a>
+      <a class="card jump stat reveal" href="#j-inovasi"><i class="arr">↗</i><span class="ic">🖥️</span><b data-count="100" data-suffix="+">0</b><span class="l">Virtual machines administered</span></a>
+      <a class="card jump stat reveal" href="#projects"><i class="arr">↗</i><span class="ic">🧪</span><b data-count="2">0</b><span class="l">Featured data projects</span></a>
+      <a class="card jump stat reveal" href="#cert-list"><i class="arr">↗</i><span class="ic">🏅</span><b data-count="7">0</b><span class="l">Certifications &amp; simulations</span></a>
+      <a class="card jump b-wide reveal" href="#skills">
+        <i class="arr">↗</i>
+        <div class="ic">🌱</div><h3>Currently Learning</h3>
+        <ul><li>Advanced deep learning and NLP</li><li>Real-time data engineering with Apache Airflow</li><li>Distributed processing (Spark, Kafka) &amp; cloud data warehouses</li></ul>
+      </a>
+      <a class="card jump b-wide reveal" href="#contact">
+        <i class="arr">↗</i>
+        <div class="ic">🤝</div><h3>Collaboration Interests</h3>
+        <ul><li>End-to-end data solutions, from raw data to production ML models</li><li>Advanced AI &amp; cloud-based data solutions</li><li>Automated workflows for large datasets</li></ul>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- ================= EXPERIENCE ================= -->
 <section id="experience">
   <div class="wrap">
-    <div class="reveal">
+    <div class="head reveal" data-n="02">
       <div class="eyebrow">02 / Experience</div>
       <h2>Where I've <span class="grad">worked</span></h2>
-      <p class="sub">Data center operations, enterprise Linux consulting, and hands-on infrastructure research.</p>
+      <p class="sub">Data center operations, enterprise Linux consulting, and hands-on infrastructure research. Click a tool at the bottom of each card to see it in my skills.</p>
     </div>
     <div class="timeline">
-      <article class="card job reveal">
-        <div class="meta"><span>Apr 2025 – Jul 2025</span><span>Jakarta, Indonesia</span></div>
-        <h3>Data Center Engineer <span class="co">· PT Lion Super Indo</span></h3>
+      <article class="card job reveal" id="j-lion">
+        <div class="job-top"><span class="kind now">Most recent</span><span class="kind">Data Center</span><span class="date">Apr 2025 – Jul 2025</span></div>
+        <h3>Data Center Engineer</h3>
+        <div class="where">PT Lion Super Indo</div><div class="loc">Jakarta, Indonesia</div>
         <ul>
           <li>Ran daily health checks on production and DR data centers (HPE/Dell): server status, AD replication, DNS/DHCP, and backup verification across mixed Windows and Linux.</li>
           <li>Migrated Active Directory, DNS, DHCP, and reverse proxy from bare-metal to VMware vSphere, validating data consistency before and after cutover.</li>
           <li>Supported a business-continuity proof of concept (Veeam DRaaS, ARR load balancing) and proposed IPAM adoption for centralized IP and asset tracking.</li>
           <li>Managed SSL certificate renewals and escalated SAN hardware issues to HPE and Dell.</li>
         </ul>
+        <div class="stack"><small>Tools →</small>
+          <a class="tag" href="#skills" data-skill="VMware vSphere">VMware vSphere</a><a class="tag" href="#skills" data-skill="Windows Server & AD">Active Directory</a><a class="tag" href="#skills" data-skill="DNS / DHCP">DNS/DHCP</a><a class="tag" href="#skills" data-skill="HPE / Dell">HPE / Dell</a><a class="tag" href="#skills" data-skill="Veeam DRaaS">Veeam DRaaS</a><a class="tag" href="#skills" data-skill="IPAM">IPAM</a>
+        </div>
       </article>
-      <article class="card job reveal">
-        <div class="meta"><span>Feb 2021 – Aug 2024</span><span>Jakarta, Indonesia</span></div>
-        <h3>IT Consultant <span class="co">· PT Inovasi Informatika Indonesia</span></h3>
+
+      <article class="card job reveal" id="j-inovasi">
+        <div class="job-top"><span class="kind c2">Consulting</span><span class="date">Feb 2021 – Aug 2024</span></div>
+        <h3>IT Consultant</h3>
+        <div class="where">PT Inovasi Informatika Indonesia</div><div class="loc">Jakarta, Indonesia</div>
         <ul>
           <li>Administered enterprise RHEL infrastructure with Red Hat Satellite and OpenStack, maintaining configuration data for 100+ virtual machines.</li>
           <li>Automated patching and provisioning with Ansible; managed Apache/Nginx web servers, Linux firewalls, and email servers.</li>
           <li>Wrote Bash/Python scripts to process system logs, detect anomalies, and generate automated reports.</li>
           <li>Reduced average downtime per incident through Linux, networking, and storage support, and delivered internal Red Hat training that improved team certification pass rates.</li>
         </ul>
+        <div class="stack"><small>Tools →</small>
+          <a class="tag" href="#skills" data-skill="Linux">Linux (RHEL)</a><a class="tag" href="#skills" data-skill="Red Hat Satellite">Red Hat Satellite</a><a class="tag" href="#skills" data-skill="OpenStack">OpenStack</a><a class="tag" href="#skills" data-skill="Ansible">Ansible</a><a class="tag" href="#skills" data-skill="Bash">Bash</a><a class="tag" href="#skills" data-skill="Python">Python</a><a class="tag" href="#skills" data-skill="Apache / Nginx">Apache / Nginx</a>
+        </div>
       </article>
-      <article class="card job reveal">
-        <div class="meta"><span>Jul 2020 – Dec 2020</span><span>Bandung, Indonesia</span></div>
-        <h3>Infrastructure &amp; Standardization Intern <span class="co">· Telkom Direktorat Digital Business</span></h3>
+
+      <article class="card job reveal" id="j-telkom">
+        <div class="job-top"><span class="kind c3">Internship</span><span class="date">Jul 2020 – Dec 2020</span></div>
+        <h3>Infrastructure &amp; Standardization Intern</h3>
+        <div class="where">Telkom Direktorat Digital Business</div><div class="loc">Bandung, Indonesia</div>
         <ul>
           <li>Studied and documented modern telco infrastructure: BRAS, Cloud Central Office, and CUSP.</li>
           <li>Tested NextEPC and StarlingX on Linux for telco-cloud feasibility, and assisted in evaluating Direct Cloud Connect for enterprise use cases.</li>
         </ul>
       </article>
-      <article class="card job reveal">
-        <div class="meta"><span>Aug 2018 – May 2020</span><span>Bandung, Indonesia</span></div>
-        <h3>Coordinator &amp; Teaching Assistant <span class="co">· SISJAR Laboratory</span></h3>
+
+      <article class="card job reveal" id="j-sisjar">
+        <div class="job-top"><span class="kind c4">Lab &amp; Teaching</span><span class="date">Aug 2018 – May 2020</span></div>
+        <h3>Coordinator &amp; Teaching Assistant</h3>
+        <div class="where">SISJAR Laboratory</div><div class="loc">Bandung, Indonesia</div>
         <ul>
           <li>Coordinated lab activities, research projects, and IT competitions, and managed internal documentation and resource planning.</li>
           <li>Guided 100+ students per semester in network design, Linux-based network management, and IT security.</li>
         </ul>
       </article>
-      <article class="card job reveal">
-        <div class="meta"><span>Jun 2019 – Aug 2019</span><span>Jakarta, Indonesia</span></div>
-        <h3>Network Infrastructure Validation Intern <span class="co">· Kementerian Sosial RI</span></h3>
+
+      <article class="card job reveal" id="j-kemensos">
+        <div class="job-top"><span class="kind c3">Internship</span><span class="date">Jun 2019 – Aug 2019</span></div>
+        <h3>Network Infrastructure Validation Intern</h3>
+        <div class="where">Kementerian Sosial RI</div><div class="loc">Jakarta, Indonesia</div>
         <ul>
           <li>Analyzed server and traffic logs from the e-PKH application to find network and application performance issues.</li>
           <li>Assisted in redesigning the on-premises network, improving availability and load distribution.</li>
         </ul>
+        <div class="stack"><small>Tools →</small><a class="tag" href="#skills" data-skill="Log Analysis">Log analysis</a></div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ================= PROJECTS ================= -->
 <section id="projects">
   <div class="wrap">
-    <div class="reveal">
+    <div class="head reveal" data-n="03">
       <div class="eyebrow">03 / Projects</div>
       <h2>Featured <span class="grad">projects</span></h2>
-      <p class="sub">Two projects that represent my work: data engineering and deep learning.</p>
+      <p class="sub">Two projects that represent my work: data engineering and deep learning. Click a tag to see that skill.</p>
     </div>
     <div class="proj-grid">
-      <article class="card proj reveal">
-        <div class="thumb t1">🚲</div>
+      <article class="card proj reveal" id="p-bike">
+        <div class="thumb t1"><svg viewBox="0 0 330 158" role="img" aria-label="Pipeline: PostgreSQL, Airflow, Great Expectations, Elasticsearch, Kibana" preserveAspectRatio="xMidYMid meet"><rect class="nd" x="18" y="48" width="48" height="46" rx="11"/><text x="42.0" y="75.0">PG</text><path class="ln" d="M66 71.0 H83"/><rect class="nd" x="83" y="48" width="48" height="46" rx="11"/><text x="107.0" y="75.0">AF</text><path class="ln" d="M131 71.0 H148"/><rect class="nd" x="148" y="48" width="48" height="46" rx="11"/><text x="172.0" y="75.0">GE</text><path class="ln" d="M196 71.0 H213"/><rect class="nd" x="213" y="48" width="48" height="46" rx="11"/><text x="237.0" y="75.0">ES</text><path class="ln" d="M261 71.0 H278"/><rect class="nd" x="278" y="48" width="48" height="46" rx="11"/><text x="302.0" y="75.0">KB</text><text x="165" y="126" style="font-weight:400;opacity:.65;font-size:10px">PostgreSQL → Airflow → Great Expectations → Elasticsearch → Kibana</text></svg></div>
         <div class="body">
           <h3>Global Bike Sales Analysis Pipeline</h3>
           <span class="when">Dec 2024</span>
           <p>An end-to-end pipeline analyzing global bike sales data (Kaggle, 2013–2023, 33 columns): data stored in PostgreSQL, processed with Apache Airflow ETL, validated with Great Expectations, indexed into Elasticsearch, and visualized in Kibana dashboards.</p>
           <ul class="find"><li>The US &amp; Australia are the most profitable markets</li><li>Ages 25–64 generate 86% of revenue</li><li>Discounts show diminishing returns beyond 10–20%</li></ul>
-          <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Airflow</span><span class="tag">Great Expectations</span><span class="tag">Elasticsearch</span><span class="tag">Kibana</span></div>
+          <div class="tags"><a class="tag" href="#skills" data-skill="PostgreSQL">PostgreSQL</a><a class="tag" href="#skills" data-skill="Apache Airflow">Airflow</a><a class="tag" href="#skills" data-skill="Great Expectations">Great Expectations</a><a class="tag" href="#skills" data-skill="Elasticsearch">Elasticsearch</a><a class="tag" href="#skills" data-skill="Kibana">Kibana</a></div>
           <div class="actions"><a class="go" href="https://github.com/ferryansa/global-bike-sales-analysis-pipeline" target="_blank" rel="noopener">View on GitHub <span>→</span></a></div>
         </div>
       </article>
-      <article class="card proj reveal">
-        <div class="thumb t2">🦜</div>
+      <article class="card proj reveal" id="p-bird">
+        <div class="thumb t2"><svg viewBox="0 0 330 158" role="img" aria-label="Neural network illustration" preserveAspectRatio="xMidYMid meet"><line class="nl" x1="70" y1="42" x2="140" y2="30"/><line class="nl" x1="70" y1="42" x2="140" y2="63"/><line class="nl" x1="70" y1="42" x2="140" y2="96"/><line class="nl" x1="70" y1="42" x2="140" y2="129"/><line class="nl" x1="70" y1="79" x2="140" y2="30"/><line class="nl" x1="70" y1="79" x2="140" y2="63"/><line class="nl" x1="70" y1="79" x2="140" y2="96"/><line class="nl" x1="70" y1="79" x2="140" y2="129"/><line class="nl" x1="70" y1="116" x2="140" y2="30"/><line class="nl" x1="70" y1="116" x2="140" y2="63"/><line class="nl" x1="70" y1="116" x2="140" y2="96"/><line class="nl" x1="70" y1="116" x2="140" y2="129"/><line class="nl" x1="140" y1="30" x2="210" y2="42"/><line class="nl" x1="140" y1="30" x2="210" y2="79"/><line class="nl" x1="140" y1="30" x2="210" y2="116"/><line class="nl" x1="140" y1="63" x2="210" y2="42"/><line class="nl" x1="140" y1="63" x2="210" y2="79"/><line class="nl" x1="140" y1="63" x2="210" y2="116"/><line class="nl" x1="140" y1="96" x2="210" y2="42"/><line class="nl" x1="140" y1="96" x2="210" y2="79"/><line class="nl" x1="140" y1="96" x2="210" y2="116"/><line class="nl" x1="140" y1="129" x2="210" y2="42"/><line class="nl" x1="140" y1="129" x2="210" y2="79"/><line class="nl" x1="140" y1="129" x2="210" y2="116"/><line class="nl" x1="210" y1="42" x2="275" y2="63"/><line class="nl" x1="210" y1="42" x2="275" y2="96"/><line class="nl" x1="210" y1="79" x2="275" y2="63"/><line class="nl" x1="210" y1="79" x2="275" y2="96"/><line class="nl" x1="210" y1="116" x2="275" y2="63"/><line class="nl" x1="210" y1="116" x2="275" y2="96"/><circle class="nn p" cx="70" cy="42" r="6" style="animation-delay:0.0s"/><circle class="nn" cx="70" cy="79" r="6" style="animation-delay:0.4s"/><circle class="nn" cx="70" cy="116" r="6" style="animation-delay:0.8s"/><circle class="nn p" cx="140" cy="30" r="6" style="animation-delay:1.2000000000000002s"/><circle class="nn" cx="140" cy="63" r="6" style="animation-delay:1.6s"/><circle class="nn" cx="140" cy="96" r="6" style="animation-delay:0.0s"/><circle class="nn p" cx="140" cy="129" r="6" style="animation-delay:0.4s"/><circle class="nn" cx="210" cy="42" r="6" style="animation-delay:0.8s"/><circle class="nn" cx="210" cy="79" r="6" style="animation-delay:1.2000000000000002s"/><circle class="nn p" cx="210" cy="116" r="6" style="animation-delay:1.6s"/><circle class="nn" cx="275" cy="63" r="6" style="animation-delay:0.0s"/><circle class="nn" cx="275" cy="96" r="6" style="animation-delay:0.4s"/></svg></div>
         <div class="body">
           <h3>Bird Species Classification</h3>
           <span class="when">Dec 2024</span>
           <p>Bird species image classification with MobileNetV2 (transfer learning, TensorFlow/Keras) on a Kaggle dataset, then improved through a refined model. Includes a demo on Hugging Face Spaces.</p>
           <span class="hl">100% accuracy on test data</span>
           <ul class="find"><li>Recognizes species across varied poses &amp; backgrounds</li><li>Applications suggested: conservation, education, ecotourism</li></ul>
-          <div class="tags"><span class="tag">MobileNetV2</span><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">Transfer Learning</span></div>
+          <div class="tags"><a class="tag" href="#skills" data-skill="MobileNetV2">MobileNetV2</a><a class="tag" href="#skills" data-skill="TensorFlow / Keras">TensorFlow</a><a class="tag" href="#skills" data-skill="TensorFlow / Keras">Keras</a><a class="tag" href="#skills" data-skill="MobileNetV2">Transfer Learning</a></div>
           <div class="actions"><a class="go" href="https://github.com/ferryansa/bird-species-classification" target="_blank" rel="noopener">View on GitHub <span>→</span></a><a class="go" href="https://huggingface.co/spaces/Ferryansa/bird-species-classification" target="_blank" rel="noopener">Live demo <span>→</span></a></div>
         </div>
       </article>
     </div>
     <div class="pipe reveal">
-      <small>How I see an end-to-end data flow</small>
-      <em>Raw Data</em><span class="ar">→</span><em>Ingest / ETL</em><span class="ar">→</span><em>Clean &amp; Validate</em><span class="ar">→</span><em>Model / Analyze</em><span class="ar">→</span><em>Visualize</em><span class="ar">→</span><em>Production</em>
+      <small>How I see an end-to-end data flow (click a step)</small>
+      <a class="st" href="#p-bike">Raw Data</a><span class="ar">→</span><a class="st" href="#skills" data-skill="Apache Airflow">Ingest / ETL</a><span class="ar">→</span><a class="st" href="#skills" data-skill="Great Expectations">Clean &amp; Validate</a><span class="ar">→</span><a class="st" href="#p-bird">Model / Analyze</a><span class="ar">→</span><a class="st" href="#skills" data-skill="Kibana">Visualize</a><span class="ar">→</span><a class="st" href="#j-lion">Production</a>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
+<!-- ================= SKILLS ================= -->
 <section id="skills">
   <div class="wrap">
-    <div class="reveal">
+    <div class="head reveal" data-n="04">
       <div class="eyebrow">04 / Skills</div>
       <h2>Tools &amp; <span class="grad">expertise</span></h2>
-      <p class="sub">Data skills on top of a solid systems foundation. Click a category to filter.</p>
+      <p class="sub">Data skills on top of a solid systems foundation. Filter by category, then click a skill to jump to where I used it.</p>
     </div>
     <div class="filters reveal" id="filters" role="tablist">
       <button class="chip on" data-f="all">All</button>
@@ -221,52 +248,50 @@
       <button class="chip" data-f="auto">Automation &amp; Monitoring</button>
     </div>
     <div class="skills reveal" id="skills-grid"></div>
+    <p class="note reveal">// tip: hover a skill to see where it appears, click to go there</p>
   </div>
 </section>
 
-<!-- CREDENTIALS -->
+<!-- ================= CREDENTIALS ================= -->
 <section id="credentials">
   <div class="wrap">
-    <div class="reveal">
+    <div class="head reveal" data-n="05">
       <div class="eyebrow">05 / Credentials</div>
       <h2>Education &amp; <span class="grad">certifications</span></h2>
       <p class="sub">Formal education, a full-time data science bootcamp, and certifications across data and systems.</p>
     </div>
     <div class="edu-grid">
-      <div class="card reveal"><div class="ic">🎓</div><h3>Bachelor of Information Systems</h3>
-        <p>Telkom University, Bandung<br><span class="when">Aug 2016 – Jul 2020</span></p><div class="big">GPA 3.64 / 4.00</div></div>
-      <div class="card reveal"><div class="ic">📊</div><h3>Full-Time Data Science Bootcamp</h3>
-        <p>Hacktiv8 Indonesia, Jakarta<br><span class="when">Sep 2024 – Dec 2024</span></p><div class="big">Final grade 87.77 / 100</div></div>
+      <a class="card jump reveal" id="c-uni" href="#experience"><i class="arr">↗</i><div class="ic">🎓</div><h3>Bachelor of Information Systems</h3>
+        <p>Telkom University, Bandung<br><span class="when">Aug 2016 – Jul 2020</span></p><div class="big">GPA 3.64 / 4.00</div></a>
+      <a class="card jump reveal" id="c-boot" href="#projects"><i class="arr">↗</i><div class="ic">📊</div><h3>Full-Time Data Science Bootcamp</h3>
+        <p>Hacktiv8 Indonesia, Jakarta<br><span class="when">Sep 2024 – Dec 2024</span></p><div class="big">Final grade 87.77 / 100</div></a>
     </div>
-    <h3 class="sub-h reveal" style="margin-top:34px">Certifications</h3>
-    <div class="certs reveal">
-      <div class="cert"><b>HackerRank — SQL (Intermediate)</b><small>Feb 2025</small></div>
-      <div class="cert"><b>PwC Digital Intelligence Job Simulation</b><small>Forage · Jan 2025</small></div>
-      <div class="cert"><b>HackerRank — Problem Solving (Basic)</b><small>Jan 2025</small></div>
-      <div class="cert"><b>BCG X Data Science Job Simulation</b><small>Forage · Dec 2024</small></div>
-      <div class="cert"><b>HackerRank — Python (Basic)</b><small>Nov 2024</small></div>
-      <div class="cert"><b>Red Hat Certified Engineer (RHCE) — Ansible 2.8</b><small>Red Hat · May 2021</small></div>
-      <div class="cert"><b>Red Hat Certified System Administrator (RHCSA) — RHEL 8</b><small>Red Hat · Mar 2021</small></div>
+    <h3 class="sub-h reveal">Certifications <span class="when">· click one to see the related skill</span></h3>
+    <div class="certs reveal" id="cert-list">
+      <a class="cert" href="#skills" data-skill="SQL"><span class="iss hr">HR</span><span><b>SQL (Intermediate)</b><small>HackerRank · Feb 2025</small></span></a>
+      <a class="cert" href="#projects"><span class="iss fg">PwC</span><span><b>Digital Intelligence Job Simulation</b><small>Forage · Jan 2025</small></span></a>
+      <a class="cert" href="#skills" data-skill="Python"><span class="iss hr">HR</span><span><b>Problem Solving (Basic)</b><small>HackerRank · Jan 2025</small></span></a>
+      <a class="cert" href="#projects"><span class="iss fg">BCG</span><span><b>BCG X Data Science Job Simulation</b><small>Forage · Dec 2024</small></span></a>
+      <a class="cert" href="#skills" data-skill="Python"><span class="iss hr">HR</span><span><b>Python (Basic)</b><small>HackerRank · Nov 2024</small></span></a>
+      <a class="cert" href="#skills" data-skill="Ansible"><span class="iss rh">RH</span><span><b>RHCE — Ansible 2.8</b><small>Red Hat · May 2021</small></span></a>
+      <a class="cert" href="#skills" data-skill="Linux"><span class="iss rh">RH</span><span><b>RHCSA — Red Hat Enterprise Linux 8</b><small>Red Hat · Mar 2021</small></span></a>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- ================= CONTACT ================= -->
 <section id="contact" class="contact">
   <div class="wrap">
     <div class="contact-box reveal">
       <div class="eyebrow">06 / Contact</div>
       <h2>Let's <span class="grad">work together</span></h2>
       <p>Thanks for stopping by! Have a data analysis, pipeline, or infrastructure project in mind, or a role that fits? I'd love to chat.</p>
+      <a class="mail" href="mailto:ferryansa.inbox@gmail.com">ferryansa.inbox@gmail.com</a>
       <div class="cta">
         <a class="btn primary" href="mailto:ferryansa.inbox@gmail.com">Send Email</a>
         <button class="btn" id="copy" type="button">Copy email address</button>
         <a class="btn" href="https://www.linkedin.com/in/ferryansa" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="https://github.com/ferryansa" target="_blank" rel="noopener">GitHub</a>
-      </div>
-      <div class="cvrow">
-        <a class="btn" href="cv/Ferryansa_CV_DADE.pdf" target="_blank" rel="noopener">📄 CV — Data Analyst / Data Engineer</a>
-        <a class="btn" href="cv/Ferryansa_CV_SysAdmin.pdf" target="_blank" rel="noopener">📄 CV — System Administrator</a>
       </div>
     </div>
   </div>
