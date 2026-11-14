@@ -1,8 +1,41 @@
+/* ==========================================================
+   Ferryansa — Portfolio interactions
+   Quick edits:
+   - Typing words:      PHRASES
+   - Skills list:       SK  (name, category, subtitle, jump target id, label)
+   - Marquee tech list: MARQUEE
+   ========================================================== */
 (function(){
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function(s,c){return (c||document).querySelector(s)};
   var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+  /* ---------- Editable data ---------- */
+  var PHRASES = ['Data Analysis','Data Engineering','Data Pipelines','Linux & Infrastructure'];
+
+  var MARQUEE = ['Python','SQL','PostgreSQL','Apache Airflow','Elasticsearch','Kibana','Great Expectations','TensorFlow / Keras','Linux','VMware vSphere','OpenStack','Ansible','Grafana'];
+
+  var WHERE = {
+    'p-bike':'Global Bike Sales Pipeline','p-bird':'Bird Species Classification',
+    'j-lion':'PT Lion Super Indo','j-inovasi':'PT Inovasi Informatika','j-kemensos':'Kemensos internship',
+    'credentials':'Credentials'
+  };
+  var CAT_COLOR = {prog:'var(--accent)',de:'var(--accent2)',db:'#a78bfa',viz:'#f59e0b',ml:'var(--ok)',infra:'var(--accent3)',auto:'#38bdf8'};
+
+  // [name, category, subtitle, jump target]
+  var SK = [
+    ['Python','prog','Pandas · scripting','j-inovasi'],['SQL','prog','querying & analysis','p-bike'],['Pandas','prog','data processing','p-bike'],
+    ['Statistics','prog','data analysis','credentials'],['Excel / Google Sheets','prog','pivot tables · VLOOKUP','credentials'],['Bash','prog','scripting','j-inovasi'],
+    ['Apache Airflow','de','orchestration','p-bike'],['ETL','de','pipelines','p-bike'],['Great Expectations','de','data validation','p-bike'],['Data Quality Assurance','de','accuracy & consistency','j-lion'],
+    ['PostgreSQL','db','relational','p-bike'],['Elasticsearch','db','search & indexing','p-bike'],
+    ['Kibana','viz','dashboards','p-bike'],['Matplotlib','viz','plotting','p-bird'],['Seaborn','viz','statistical plots','p-bird'],
+    ['MobileNetV2','ml','transfer learning','p-bird'],['TensorFlow / Keras','ml','deep learning','p-bird'],['Hugging Face Spaces','ml','model demo','p-bird'],
+    ['Linux','infra','RHEL · CentOS · Ubuntu · SUSE','j-inovasi'],['Windows Server & AD','infra','Active Directory','j-lion'],['VMware vSphere','infra','virtualization','j-lion'],['OpenStack','infra','private cloud','j-inovasi'],
+    ['Red Hat Satellite','infra','patch & content mgmt','j-inovasi'],['HPE / Dell','infra','servers & SAN','j-lion'],['DNS / DHCP','infra','network services','j-lion'],['Apache / Nginx','infra','web servers','j-inovasi'],
+    ['Linux Firewall','infra','security','j-inovasi'],['Email Server','infra','administration','j-inovasi'],['Veeam DRaaS','infra','backup & DR','j-lion'],['SSL/TLS Certificates','infra','renewal & mgmt','j-lion'],['IPAM','infra','IP address mgmt','j-lion'],
+    ['Ansible','auto','automation','j-inovasi'],['Patch Management','auto','provisioning','j-inovasi'],['Grafana','auto','monitoring','j-inovasi'],['ELK Stack','auto','log monitoring','j-inovasi'],['Log Analysis','auto','anomaly detection','j-kemensos']
+  ];
 
   /* ---------- Theme ---------- */
   var root = document.documentElement;
@@ -17,57 +50,97 @@
   var saved=null; try{saved=localStorage.getItem('theme')}catch(e){}
   if(!saved && window.matchMedia('(prefers-color-scheme: light)').matches) saved='light';
   setTheme(saved||'dark');
-  $('#theme').addEventListener('click',function(){
-    setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark');
-  });
+  $('#theme').addEventListener('click',function(){ setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'); });
 
   /* ---------- Mobile menu ---------- */
   var links=$('#links');
   $('#burger').addEventListener('click',function(){links.classList.toggle('open')});
-  $$('#links a.l').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open')})});
 
   /* ---------- Typing ---------- */
-  var phrases=['Data Engineering','Machine Learning','Data Analysis','Cloud & Infrastructure'];
   var typed=$('#typed'), pi=0, ci=0, del=false;
   function tick(){
-    var p=phrases[pi];
+    var p=PHRASES[pi];
     if(reduce){typed.textContent=p;return}
     typed.textContent=p.slice(0,ci);
     if(!del && ci<p.length){ci++;setTimeout(tick,75)}
     else if(!del){del=true;setTimeout(tick,1500)}
     else if(ci>0){ci--;setTimeout(tick,38)}
-    else{del=false;pi=(pi+1)%phrases.length;setTimeout(tick,300)}
+    else{del=false;pi=(pi+1)%PHRASES.length;setTimeout(tick,300)}
   }
   tick();
 
-  /* ---------- Skills ---------- */
-  var SK=[
-    ['Python','prog','pandas · NumPy'],['scikit-learn','ml','modeling'],['SQL','prog','querying & analysis'],
-    ['Supervised Learning','ml','classification · regression'],['Unsupervised Learning','ml','clustering'],['Model Evaluation','ml','metrics & validation'],['Model Deployment','ml','to production'],
-    ['Tableau','viz','dashboard'],['matplotlib','viz','plotting'],['seaborn','viz','statistical plots'],
-    ['PostgreSQL','db','relational'],['MongoDB','db','NoSQL'],['MySQL','db','relational'],['NoSQL','db','non-relational'],
-    ['ETL','de','pipeline'],['Data Ingestion','de','source → warehouse'],['Apache Airflow','de','orchestration'],['Hadoop','de','big data'],['Spark','de','big data'],
-    ['Data Validation','de','data quality'],['Data Cleaning','de','data quality'],['Preprocessing','de','data quality'],
-    ['Great Expectations','de','data validation'],['TensorFlow / Keras','ml','deep learning'],['Elasticsearch & Kibana','de','search & dashboards'],['Hugging Face Spaces','ml','model demo'],['Git','dev','version control'],['GitHub','dev','collaboration'],['VSCode','dev','editor'],['Jupyter Notebook','dev','exploration'],
-    ['Web Scraping','prog','data collection'],['API Integration','prog','REST'],['Time Series','ml','forecasting'],['Anomaly Detection','ml','deteksi outlier']
-  ];
+  /* ---------- Marquee (click -> skill) ---------- */
+  var mq=$('#marquee'), mqHtml='';
+  [0,1].forEach(function(n){
+    MARQUEE.forEach(function(m){
+      mqHtml+='<a class="mq" href="#skills" data-skill="'+m+'"'+(n?' tabindex="-1" aria-hidden="true"':'')+'>'+m+'</a>';
+    });
+  });
+  mq.innerHTML=mqHtml;
+
+  /* ---------- Skills grid + filters ---------- */
   var grid=$('#skills-grid');
   grid.innerHTML=SK.map(function(s){
-    return '<div class="sk" data-c="'+s[1]+'"><b>'+s[0]+'</b><small>'+s[2]+'</small></div>';
+    var w=WHERE[s[3]]||'';
+    return '<a class="sk" href="#'+s[3]+'" data-name="'+s[0]+'" data-c="'+s[1]+'" style="--cat:'+CAT_COLOR[s[1]]+'">'+
+           '<b>'+s[0]+'</b><small>'+s[2]+'</small><span class="w">↗ '+w+'</span></a>';
   }).join('');
-  $('#filters').addEventListener('click',function(e){
-    var b=e.target.closest('.chip'); if(!b) return;
-    $$('.chip').forEach(function(c){c.classList.remove('on')}); b.classList.add('on');
-    var f=b.getAttribute('data-f');
+  var counts={all:SK.length};
+  SK.forEach(function(s){counts[s[1]]=(counts[s[1]]||0)+1});
+  $$('#filters .chip').forEach(function(c){
+    c.insertAdjacentHTML('beforeend','<i>'+counts[c.getAttribute('data-f')]+'</i>');
+  });
+  function applyFilter(f){
+    $$('#filters .chip').forEach(function(c){c.classList.toggle('on',c.getAttribute('data-f')===f)});
     $$('.sk',grid).forEach(function(el,i){
       var show=f==='all'||el.getAttribute('data-c')===f;
       el.classList.toggle('hide',!show);
       el.classList.remove('pop');
       if(show){void el.offsetWidth;el.style.animationDelay=(i%12)*25+'ms';el.classList.add('pop')}
     });
+  }
+  $('#filters').addEventListener('click',function(e){
+    var b=e.target.closest('.chip'); if(!b) return;
+    applyFilter(b.getAttribute('data-f'));
   });
 
-  /* ---------- Reveal, counters, bars ---------- */
+  /* ---------- Jumping between related sections ---------- */
+  function flash(el){
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+    setTimeout(function(){el.classList.remove('flash')},2100);
+  }
+  function scrollToEl(el,center){
+    el.scrollIntoView({behavior:reduce?'auto':'smooth',block:center?'center':'start'});
+  }
+  function goTo(id){
+    var el=document.getElementById(id); if(!el) return;
+    var isSection = el.tagName==='SECTION' || el.id==='top';
+    scrollToEl(el,!isSection);
+    if(!isSection){
+      setTimeout(function(){
+        if(id==='cert-list') $$('.cert',el).forEach(flash); else flash(el);
+      },reduce?0:550);
+    }
+  }
+  function goSkill(name){
+    var f=$('#filters .chip.on'); if(f && f.getAttribute('data-f')!=='all') applyFilter('all');
+    var tile=$$('.sk',grid).filter(function(t){return t.getAttribute('data-name')===name})[0];
+    if(!tile){goTo('skills');return}
+    scrollToEl(tile,true);
+    setTimeout(function(){flash(tile)},reduce?0:600);
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id=a.getAttribute('href').slice(1);
+    if(!id) return;
+    e.preventDefault();
+    links.classList.remove('open');
+    var sk=a.getAttribute('data-skill');
+    if(sk) goSkill(sk); else goTo(id);
+  });
+
+  /* ---------- Counters + reveal ---------- */
   function countUp(el){
     var to=+el.getAttribute('data-count'), suf=el.getAttribute('data-suffix')||'', t0=null;
     if(reduce){el.textContent=to+suf;return}
@@ -81,13 +154,13 @@
     es.forEach(function(en){
       if(!en.isIntersecting)return;
       var el=en.target; el.classList.add('in');
+      if(el.hasAttribute('data-count')) countUp(el);
       $$('[data-count]',el).forEach(countUp);
-      $$('.fill',el).forEach(function(f){f.style.width=f.getAttribute('data-w')+'%'});
       io.unobserve(el);
     });
-  },{threshold:.15});
+  },{threshold:.12});
   $$('.reveal').forEach(function(el,i){
-    el.style.transitionDelay=(i%3)*90+'ms'; io.observe(el);
+    el.style.transitionDelay=(i%3)*80+'ms'; io.observe(el);
   });
 
   /* ---------- Scroll: progress, nav highlight, to-top ---------- */
@@ -97,13 +170,13 @@
     prog.style.width=(y/(h.scrollHeight-h.clientHeight)*100)+'%';
     top.classList.toggle('show',y>600);
     var cur='';
-    secs.forEach(function(s){if(y+140>=s.offsetTop)cur=s.id});
+    secs.forEach(function(s){if(y+160>=s.offsetTop)cur=s.id});
     navs.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
   }
   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
   top.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
 
-  /* ---------- Project card spotlight ---------- */
+  /* ---------- Project card spotlight + hero glow ---------- */
   $$('.proj').forEach(function(c){
     c.addEventListener('pointermove',function(e){
       var r=c.getBoundingClientRect();
@@ -111,25 +184,23 @@
       c.style.setProperty('--my',(e.clientY-r.top)+'px');
     });
   });
+  var hero=$('#hero');
+  hero.addEventListener('pointermove',function(e){
+    var r=hero.getBoundingClientRect();
+    hero.style.setProperty('--hx',(e.clientX-r.left)+'px');
+    hero.style.setProperty('--hy',(e.clientY-r.top)+'px');
+  });
 
   /* ---------- Terminal tilt ---------- */
   var tilt=$('#tilt');
   if(!reduce && window.matchMedia('(hover:hover)').matches){
     tilt.parentElement.addEventListener('pointermove',function(e){
       var r=tilt.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
-      tilt.style.transform='perspective(900px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg)';
+      tilt.style.transform='perspective(900px) rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg)';
     });
     tilt.addEventListener('pointerleave',function(){tilt.style.transform=''});
   }
 
-  /* ---------- Copy email ---------- */
-  var toast=$('#toast');
-  $('#copy').addEventListener('click',function(){
-    var mail='ferryansa.inbox@gmail.com';
-    function done(){toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},1800)}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(mail).then(done,done)}
-    else{var t=document.createElement('textarea');t.value=mail;document.body.appendChild(t);t.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(t);done()}
-  });
   $('#yr').textContent=new Date().getFullYear();
 
   /* ---------- Network canvas background ---------- */
