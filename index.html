@@ -18,6 +18,7 @@
 </head>
 <body>
 
+<div class="progress" id="progress"></div>
 <nav>
   <div class="in">
     <a href="#top" class="logo">ferryansa</a>
@@ -28,6 +29,7 @@
       <a href="#skills">Skills</a>
       <a href="#credentials">Credentials</a>
       <a href="#contact">Contact</a>
+      <button class="theme" id="theme" type="button" aria-label="Toggle light/dark theme">🌙</button>
     </div>
   </div>
 </nav>
@@ -39,8 +41,9 @@
   <div class="wrap hero-grid">
     <div class="hero-text">
       <p class="eyebrow">Cirebon, Indonesia</p>
-      <h1>Ferryansa</h1>
+      <h1>Hi, <span class="nm">Ferryansa</span> here<span class="wave" aria-hidden="true">👋</span></h1>
       <p class="role"><span>Data Analyst</span> <span>Data Engineer</span></p>
+      <p class="typing" aria-live="off"><span id="typed">SQL · Python · Airflow · Kibana</span><span class="caret" aria-hidden="true"></span></p>
       <p class="lead">I build data pipelines and analyses with SQL, Python, Airflow, and Elasticsearch/Kibana, backed by 4+ years of running production Linux and Windows infrastructure.</p>
       <div class="cta">
         <a class="btn primary" href="#projects">View Projects</a>
@@ -106,9 +109,9 @@
     <div class="head"><span class="ep">EP.01</span><h2>About</h2><span class="jp" aria-hidden="true">プロフィール</span></div>
     <p class="about-text">I started in infrastructure, where I learned why data has to be accurate, consistent, and available. Now I build the pipelines and analysis on top of that foundation: from raw data to dashboards, with quality checks along the way.</p>
     <div class="stats">
-      <div class="stat"><b>4+</b><span>Years of IT experience</span></div>
-      <div class="stat"><b>100+</b><span>Virtual machines administered</span></div>
-      <div class="stat"><b>2</b><span>Featured data projects</span></div>
+      <div class="stat"><b data-count="4" data-suffix="+">4+</b><span>Years of IT experience</span></div>
+      <div class="stat"><b data-count="100" data-suffix="+">100+</b><span>Virtual machines administered</span></div>
+      <div class="stat"><b data-count="2">2</b><span>Featured data projects</span></div>
     </div>
   </div>
 </section>
@@ -190,10 +193,10 @@
   <div class="wrap">
     <div class="head"><span class="ep">EP.04</span><h2>Skills</h2><span class="jp" aria-hidden="true">スキル</span></div>
     <div class="skill-grid">
-      <div class="sk-box"><h3>Data &amp; Analytics</h3><ul><li>Python</li><li>SQL</li><li>Pandas</li><li>Statistics</li><li>Excel / Google Sheets</li><li>Kibana</li><li>Matplotlib</li><li>Seaborn</li></ul></div>
-      <div class="sk-box"><h3>Data Engineering</h3><ul><li>PostgreSQL</li><li>Apache Airflow</li><li>ETL</li><li>Great Expectations</li><li>Elasticsearch</li></ul></div>
-      <div class="sk-box"><h3>Machine Learning</h3><ul><li>TensorFlow / Keras</li><li>MobileNetV2</li><li>Hugging Face Spaces</li></ul></div>
-      <div class="sk-box"><h3>Infrastructure &amp; Automation</h3><ul><li>Linux (RHEL)</li><li>Windows Server &amp; AD</li><li>VMware vSphere</li><li>OpenStack</li><li>Red Hat Satellite</li><li>Ansible</li><li>Bash</li><li>Grafana</li><li>ELK Stack</li></ul></div>
+      <div class="sk-box" data-cat="data"><h3>Data &amp; Analytics</h3><ul><li>Python</li><li>SQL</li><li>Pandas</li><li>Statistics</li><li>Excel / Google Sheets</li><li>Kibana</li><li>Matplotlib</li><li>Seaborn</li></ul></div>
+      <div class="sk-box" data-cat="de"><h3>Data Engineering</h3><ul><li>PostgreSQL</li><li>Apache Airflow</li><li>ETL</li><li>Great Expectations</li><li>Elasticsearch</li></ul></div>
+      <div class="sk-box" data-cat="ml"><h3>Machine Learning</h3><ul><li>TensorFlow / Keras</li><li>MobileNetV2</li><li>Hugging Face Spaces</li></ul></div>
+      <div class="sk-box" data-cat="infra"><h3>Infrastructure &amp; Automation</h3><ul><li>Linux (RHEL)</li><li>Windows Server &amp; AD</li><li>VMware vSphere</li><li>OpenStack</li><li>Red Hat Satellite</li><li>Ansible</li><li>Bash</li><li>Grafana</li><li>ELK Stack</li></ul></div>
     </div>
     <div class="learning">
       <h3>Currently learning</h3>
@@ -244,5 +247,6 @@
 </main>
 
 <footer><div class="wrap">© 2026 Ferryansa · Cirebon, Indonesia</div></footer>
+<script src="script.js"></script>
 </body>
 </html>

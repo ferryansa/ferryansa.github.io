@@ -1,195 +1,147 @@
-// /* ==========================================================
-//    Ferryansa — Portfolio interactions
-//    Quick edits:
-//    - Typing words:       PHRASES
-//    - Ticker words:       MARQUEE
-//    - Skills list:        SK  [name, category, subtitle, jump target id or null]
-//      (a skill is clickable ONLY when it has a target; use null for none)
-//    ========================================================== */
-// (function(){
-//   'use strict';
-//   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-//   var $ = function(s,c){return (c||document).querySelector(s)};
-//   var $$ = function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+/* ===== Ferryansa portfolio — optional features =====
+   Switch any feature on/off with true/false below.
+   The site works fine even if this file is removed. */
+(function(){
+  'use strict';
 
-//   /* ---------- Editable data ---------- */
-//   var PHRASES = ['Data Analysis','Data Engineering','Data Pipelines','Linux & Infrastructure'];
-//   var MARQUEE = ['Python','SQL','PostgreSQL','Apache Airflow','Elasticsearch','Kibana','Great Expectations','TensorFlow / Keras','Linux','VMware vSphere','OpenStack','Ansible','Grafana'];
+  var FEATURES = {
+    theme:    true,   // light/dark button in the menu
+    typing:   true,   // typing line under the role chips
+    countUp:  true,   // numbers count up in About
+    reveal:   true,   // sections fade in while scrolling
+    filter:   true,   // skill category chips
+    progress: true,   // reading-progress bar + back-to-top button + active menu link
+    ticker:   false,  // scrolling tech strip under the hero
+    petals:   false   // falling sakura petals
+  };
 
-//   var WHERE = {
-//     'p-bike':'Bike Sales Pipeline','p-bird':'Bird Species Classification',
-//     'j-lion':'PT Lion Super Indo','j-inovasi':'PT Inovasi Informatika','j-kemensos':'Kemensos internship'
-//   };
-//   var CAT = {prog:'lav',de:'sky',db:'butter',viz:'pink',ml:'mint',infra:'peach',auto:'aqua'};
+  var PHRASES = ['SQL · Python · Airflow · Kibana','Building data pipelines','Turning data into insight','Linux & infrastructure background'];
+  var TICKER  = ['PostgreSQL','Apache Airflow','Great Expectations','Elasticsearch','Kibana','Python','SQL','TensorFlow','Linux','Ansible'];
 
-//   var SK = [
-//     ['Python','prog','Pandas · scripting','j-inovasi'],['SQL','prog','querying & analysis','p-bike'],['Pandas','prog','data processing','p-bike'],
-//     ['Statistics','prog','data analysis',null],['Excel / Google Sheets','prog','pivot tables · VLOOKUP',null],['Bash','prog','scripting','j-inovasi'],
-//     ['Apache Airflow','de','orchestration','p-bike'],['ETL','de','pipelines','p-bike'],['Great Expectations','de','data validation','p-bike'],['Data Quality Assurance','de','accuracy & consistency','j-lion'],
-//     ['PostgreSQL','db','relational','p-bike'],['Elasticsearch','db','search & indexing','p-bike'],
-//     ['Kibana','viz','dashboards','p-bike'],['Matplotlib','viz','plotting','p-bird'],['Seaborn','viz','statistical plots','p-bird'],
-//     ['MobileNetV2','ml','transfer learning','p-bird'],['TensorFlow / Keras','ml','deep learning','p-bird'],['Hugging Face Spaces','ml','model demo','p-bird'],
-//     ['Linux','infra','RHEL · CentOS · Ubuntu · SUSE','j-inovasi'],['Windows Server & AD','infra','Active Directory','j-lion'],['VMware vSphere','infra','virtualization','j-lion'],['OpenStack','infra','private cloud','j-inovasi'],
-//     ['Red Hat Satellite','infra','patch & content mgmt','j-inovasi'],['HPE / Dell','infra','servers & SAN','j-lion'],['DNS / DHCP','infra','network services','j-lion'],['Apache / Nginx','infra','web servers','j-inovasi'],
-//     ['Linux Firewall','infra','security','j-inovasi'],['Email Server','infra','administration','j-inovasi'],['Veeam DRaaS','infra','backup & DR','j-lion'],['SSL/TLS Certificates','infra','renewal & mgmt','j-lion'],['IPAM','infra','IP address mgmt','j-lion'],
-//     ['Ansible','auto','automation','j-inovasi'],['Patch Management','auto','provisioning','j-inovasi'],['Grafana','auto','monitoring',null],['ELK Stack','auto','log monitoring',null],['Log Analysis','auto','anomaly detection','j-kemensos']
-//   ];
+  var $  = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
 
-//   /* ---------- Theme (day / night) ---------- */
-//   var root = document.documentElement;
-//   function setTheme(t){
-//     root.setAttribute('data-theme',t);
-//     $('#themeIcon').textContent = t==='dark' ? '☀️' : '🌙';
-//     $('meta[name=theme-color]').setAttribute('content', t==='dark'?'#1c1929':'#fff8f1');
-//     try{localStorage.setItem('theme',t)}catch(e){}
-//   }
-//   var saved=null; try{saved=localStorage.getItem('theme')}catch(e){}
-//   if(!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) saved='dark';
-//   setTheme(saved||'light');
-//   $('#theme').addEventListener('click',function(){ setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'); });
+  /* ---- Theme ---- */
+  if(FEATURES.theme){
+    var root=document.documentElement, btn=$('#theme');
+    var setTheme=function(t){
+      root.setAttribute('data-theme',t);
+      if(btn) btn.textContent = t==='dark' ? '☀️' : '🌙';
+      var m=$('meta[name=theme-color]'); if(m) m.setAttribute('content', t==='dark'?'#1b1833':'#fff6e5');
+      try{localStorage.setItem('theme',t)}catch(e){}
+    };
+    var saved=null; try{saved=localStorage.getItem('theme')}catch(e){}
+    if(!saved && window.matchMedia('(prefers-color-scheme: dark)').matches) saved='dark';
+    setTheme(saved||'light');
+    if(btn) btn.addEventListener('click',function(){ setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'); });
+  } else { var tb=$('#theme'); if(tb) tb.style.display='none'; }
 
-//   /* ---------- Mobile menu ---------- */
-//   var links=$('#links');
-//   $('#burger').addEventListener('click',function(){links.classList.toggle('open')});
+  /* ---- Typing ---- */
+  var typed=$('#typed');
+  if(FEATURES.typing && typed && !reduce){
+    var pi=0, ci=0, del=false;
+    var tick=function(){
+      var p=PHRASES[pi];
+      typed.textContent=p.slice(0,ci);
+      if(!del && ci<p.length){ci++;setTimeout(tick,70)}
+      else if(!del){del=true;setTimeout(tick,1600)}
+      else if(ci>0){ci--;setTimeout(tick,35)}
+      else{del=false;pi=(pi+1)%PHRASES.length;setTimeout(tick,300)}
+    };
+    ci=0; tick();
+  } else if(!FEATURES.typing){ var tp=$('.typing'); if(tp) tp.style.display='none'; }
 
-//   /* ---------- Typing ---------- */
-//   var typed=$('#typed'), pi=0, ci=0, del=false;
-//   function tick(){
-//     var p=PHRASES[pi];
-//     if(reduce){typed.textContent=p;return}
-//     typed.textContent=p.slice(0,ci);
-//     if(!del && ci<p.length){ci++;setTimeout(tick,75)}
-//     else if(!del){del=true;setTimeout(tick,1500)}
-//     else if(ci>0){ci--;setTimeout(tick,38)}
-//     else{del=false;pi=(pi+1)%PHRASES.length;setTimeout(tick,300)}
-//   }
-//   tick();
+  /* ---- Count-up ---- */
+  var countUp=function(el){
+    var end=+el.getAttribute('data-count'), suf=el.getAttribute('data-suffix')||'', t0=null, dur=1100;
+    var step=function(t){
+      if(!t0) t0=t;
+      var k=Math.min((t-t0)/dur,1); el.textContent=Math.round(end*(1-Math.pow(1-k,3)))+suf;
+      if(k<1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
 
-//   /* ---------- Ticker (decorative, not clickable) ---------- */
-//   var mqHtml='';
-//   [0,1].forEach(function(){ MARQUEE.forEach(function(m){ mqHtml+='<span class="mq">'+m+'</span>'; }); });
-//   $('#marquee').innerHTML=mqHtml;
+  /* ---- Reveal + count-up on scroll ---- */
+  var targets=$$('.head,.stat,.job,.earlier,.proj,.sk-box,.learning,.edu,.certs,.mail');
+  if('IntersectionObserver' in window && (FEATURES.reveal || FEATURES.countUp) && !reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        e.target.classList.add('in'); io.unobserve(e.target);
+        if(FEATURES.countUp){ var n=$('[data-count]',e.target); if(n) countUp(n); }
+      });
+    },{threshold:.15});
+    targets.forEach(function(t){ if(FEATURES.reveal) t.classList.add('reveal'); io.observe(t); });
+  }
 
-//   /* ---------- Skills grid + filters ---------- */
-//   var grid=$('#skills-grid');
-//   grid.innerHTML=SK.map(function(s){
-//     var c=CAT[s[1]];
-//     var attrs='data-name="'+s[0]+'" data-c="'+s[1]+'" style="--t:var(--'+c+');--d:var(--'+c+'-d)"';
-//     var inner='<b>'+s[0]+'</b><small>'+s[2]+'</small>';
-//     if(!s[3]) return '<div class="sk static" '+attrs+'>'+inner+'</div>';
-//     return '<a class="sk" href="#'+s[3]+'" '+attrs+'>'+inner+'<span class="w">↗ '+(WHERE[s[3]]||'')+'</span></a>';
-//   }).join('');
-//   var counts={all:SK.length};
-//   SK.forEach(function(s){counts[s[1]]=(counts[s[1]]||0)+1});
-//   $$('#filters .chip').forEach(function(c){
-//     c.insertAdjacentHTML('beforeend','<i>'+counts[c.getAttribute('data-f')]+'</i>');
-//   });
-//   $('#filters').addEventListener('click',function(e){
-//     var b=e.target.closest('.chip'); if(!b) return;
-//     var f=b.getAttribute('data-f');
-//     $$('#filters .chip').forEach(function(c){c.classList.toggle('on',c===b)});
-//     $$('.sk',grid).forEach(function(el,i){
-//       var show=f==='all'||el.getAttribute('data-c')===f;
-//       el.classList.toggle('hide',!show);
-//       el.classList.remove('pop');
-//       if(show){void el.offsetWidth;el.style.animationDelay=(i%12)*25+'ms';el.classList.add('pop')}
-//     });
-//   });
+  /* ---- Skill filter ---- */
+  if(FEATURES.filter){
+    var boxes=$$('.sk-box'), grid=$('.skill-grid');
+    if(grid && boxes.length){
+      var bar=document.createElement('div'); bar.className='filters';
+      var mk=function(label,cat){
+        var b=document.createElement('button'); b.type='button'; b.className='chip'+(cat==='all'?' on':''); b.textContent=label; b.setAttribute('data-f',cat); return b;
+      };
+      bar.appendChild(mk('All','all'));
+      boxes.forEach(function(b){ bar.appendChild(mk($('h3',b).textContent,b.getAttribute('data-cat'))); });
+      grid.parentNode.insertBefore(bar,grid);
+      bar.addEventListener('click',function(e){
+        var c=e.target.closest('.chip'); if(!c) return;
+        $$('.chip',bar).forEach(function(x){x.classList.toggle('on',x===c)});
+        var f=c.getAttribute('data-f');
+        boxes.forEach(function(b){ b.classList.toggle('hide', f!=='all' && b.getAttribute('data-cat')!==f); });
+      });
+    }
+  }
 
-//   /* ---------- Jumping (only links that have a real destination) ---------- */
-//   function flash(el){
-//     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
-//     setTimeout(function(){el.classList.remove('flash')},2100);
-//   }
-//   function goTo(id){
-//     var el=document.getElementById(id); if(!el) return;
-//     var isSection = el.tagName==='SECTION' || el.id==='top';
-//     el.scrollIntoView({behavior:reduce?'auto':'smooth',block:isSection?'start':'center'});
-//     if(!isSection){
-//       setTimeout(function(){
-//         if(id==='cert-list') $$('.cert',el).forEach(flash); else flash(el);
-//       },reduce?0:550);
-//     }
-//   }
-//   document.addEventListener('click',function(e){
-//     var a=e.target.closest('a[href^="#"]');
-//     if(!a) return;
-//     var id=a.getAttribute('href').slice(1);
-//     if(!id) return;
-//     e.preventDefault();
-//     links.classList.remove('open');
-//     goTo(id);
-//   });
+  /* ---- Progress bar, back-to-top, active menu link ---- */
+  if(FEATURES.progress){
+    var bar2=$('#progress'), top=document.createElement('button');
+    top.className='totop'; top.type='button'; top.setAttribute('aria-label','Back to top'); top.textContent='↑';
+    top.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+    document.body.appendChild(top);
+    var links=$$('.links a'), secs=links.map(function(a){return $(a.getAttribute('href'))});
+    var onScroll=function(){
+      var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+      if(bar2) bar2.style.width=(max>0?window.scrollY/max*100:0)+'%';
+      top.classList.toggle('show',window.scrollY>600);
+      var cur=-1; secs.forEach(function(s,i){ if(s && s.getBoundingClientRect().top<=120) cur=i; });
+      links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+    };
+    window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  } else { var pb=$('#progress'); if(pb) pb.style.display='none'; }
 
-//   /* ---------- Counters + reveal ---------- */
-//   function countUp(el){
-//     var to=+el.getAttribute('data-count'), suf=el.getAttribute('data-suffix')||'', t0=null;
-//     if(reduce){el.textContent=to+suf;return}
-//     (function step(ts){
-//       if(!t0)t0=ts; var p=Math.min((ts-t0)/1200,1), e=1-Math.pow(1-p,3);
-//       el.textContent=Math.round(to*e)+suf;
-//       if(p<1)requestAnimationFrame(step);
-//     })(performance.now());
-//   }
-//   var io=new IntersectionObserver(function(es){
-//     es.forEach(function(en){
-//       if(!en.isIntersecting)return;
-//       var el=en.target; el.classList.add('in');
-//       $$('[data-count]',el).forEach(countUp);
-//       io.unobserve(el);
-//     });
-//   },{threshold:.12});
-//   $$('.reveal').forEach(function(el,i){
-//     el.style.transitionDelay=(i%3)*80+'ms'; io.observe(el);
-//   });
+  /* ---- Ticker ---- */
+  if(FEATURES.ticker){
+    var hero=$('.hero');
+    if(hero){
+      var w=document.createElement('div'); w.className='mq-wrap'; w.setAttribute('aria-hidden','true');
+      var tr=document.createElement('div'); tr.className='mq-track';
+      tr.innerHTML=TICKER.concat(TICKER).map(function(t){return '<span>'+t+'</span>'}).join('');
+      w.appendChild(tr); hero.parentNode.insertBefore(w,hero.nextSibling);
+    }
+  }
 
-//   /* ---------- Scroll: progress, nav highlight, to-top ---------- */
-//   var secs=$$('main section'), navs=$$('#links a.l'), prog=$('#progress'), top=$('#totop');
-//   function onScroll(){
-//     var h=document.documentElement, y=h.scrollTop||document.body.scrollTop;
-//     prog.style.width=(y/(h.scrollHeight-h.clientHeight)*100)+'%';
-//     top.classList.toggle('show',y>600);
-//     var cur='';
-//     secs.forEach(function(s){if(y+200>=s.offsetTop)cur=s.id});
-//     navs.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
-//   }
-//   window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
-//   top.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
-//   $('#yr').textContent=new Date().getFullYear();
-
-//   /* ---------- Falling sakura petals ---------- */
-//   var cv=$('#bg'), ctx=cv.getContext('2d'), W,H,petals=[];
-//   function size(){
-//     var d=Math.min(window.devicePixelRatio||1,2);
-//     W=cv.width=innerWidth*d; H=cv.height=innerHeight*d; cv._d=d;
-//     var n=Math.min(26,Math.floor(innerWidth/55));
-//     petals=[]; for(var i=0;i<n;i++)petals.push(newPetal(true));
-//   }
-//   function newPetal(anywhere){
-//     var d=cv._d||1;
-//     return {x:Math.random()*W,y:anywhere?Math.random()*H:-20*d,r:(5+Math.random()*7)*d,rot:Math.random()*6.28,
-//             vr:(Math.random()-.5)*.02,vy:(.35+Math.random()*.6)*d,sw:Math.random()*6.28,swv:.01+Math.random()*.015,a:.35+Math.random()*.35};
-//   }
-//   function drawPetal(p,col){
-//     ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.a;
-//     ctx.fillStyle='rgb('+col+')';
-//     ctx.beginPath(); ctx.moveTo(0,-p.r);
-//     ctx.bezierCurveTo(p.r*.9,-p.r*.8,p.r*.9,p.r*.5,0,p.r);
-//     ctx.bezierCurveTo(-p.r*.9,p.r*.5,-p.r*.9,-p.r*.8,0,-p.r);
-//     ctx.fill(); ctx.restore();
-//   }
-//   size(); addEventListener('resize',size);
-//   function draw(){
-//     ctx.clearRect(0,0,W,H);
-//     var dark=root.getAttribute('data-theme')==='dark', col=dark?'255,159,189':'247,150,182';
-//     petals.forEach(function(p,i){
-//       if(!reduce){
-//         p.sw+=p.swv; p.x+=Math.sin(p.sw)*.6*cv._d; p.y+=p.vy; p.rot+=p.vr;
-//         if(p.y>H+20||p.x<-30||p.x>W+30) petals[i]=newPetal(false);
-//       }
-//       drawPetal(p,col);
-//     });
-//     if(!reduce)requestAnimationFrame(draw);
-//   }
-//   draw();
-// })();
+  /* ---- Falling petals ---- */
+  if(FEATURES.petals && !reduce){
+    var cv=document.createElement('canvas'); cv.id='petals'; cv.setAttribute('aria-hidden','true'); document.body.appendChild(cv);
+    var cx=cv.getContext('2d'), W=0,H=0, ps=[];
+    var size=function(){W=cv.width=innerWidth;H=cv.height=innerHeight};
+    size(); addEventListener('resize',size);
+    var np=function(init){return{x:Math.random()*W,y:init?Math.random()*H:-20,r:4+Math.random()*5,vy:.5+Math.random()*.9,vx:-.3+Math.random()*.6,a:Math.random()*6.28,va:.01+Math.random()*.02}};
+    for(var i=0;i<22;i++) ps.push(np(true));
+    (function draw(){
+      cx.clearRect(0,0,W,H);
+      ps.forEach(function(p,i){
+        p.y+=p.vy; p.x+=p.vx+Math.sin(p.a)*.4; p.a+=p.va;
+        if(p.y>H+20) ps[i]=np(false);
+        cx.save(); cx.translate(p.x,p.y); cx.rotate(p.a); cx.fillStyle='rgba(255,143,179,.75)';
+        cx.beginPath(); cx.ellipse(0,0,p.r,p.r*.6,0,0,6.28); cx.fill(); cx.restore();
+      });
+      requestAnimationFrame(draw);
+    })();
+  }
+})();
