@@ -327,3 +327,33 @@ footer{padding:46px 0 56px;text-align:center;color:var(--muted);font-weight:700;
 /* institution logos in education cards */
 .edu-logo{display:block;width:64px;height:64px;border-radius:50%;overflow:hidden;background:#fff;border:3px solid var(--d,var(--ink));margin-bottom:10px}
 .edu-logo img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* custom cursor + click sparkles (desktop mouse only; enabled by script.js) */
+html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor .chip{cursor:none}
+.cur-dot,.cur-ring{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;opacity:0;transition:opacity .2s}
+.cur-dot.on,.cur-ring.on{opacity:1}
+.cur-dot{width:8px;height:8px;border-radius:50%;background:var(--pink-d);box-shadow:0 0 0 2px #fff}
+.cur-ring{width:34px;height:34px;border-radius:50%;border:2px solid var(--pink-d);transition:opacity .2s,width .2s,height .2s,background .2s,border-color .2s;mix-blend-mode:normal}
+.cur-ring.hover{width:52px;height:52px;background:color-mix(in srgb,var(--pink-d) 18%,transparent);border-color:var(--lav-d)}
+.cur-ring.down{width:24px;height:24px}
+.spark-fx{position:fixed;z-index:9998;pointer-events:none;color:var(--pink-d);font-size:15px;font-weight:800;transform:translate(-50%,-50%);animation:sparkfx .65s ease-out forwards}
+.spark-fx:nth-child(3n){color:var(--lav-d)}.spark-fx:nth-child(3n+1){color:var(--butter-d)}
+@keyframes sparkfx{to{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.4);opacity:0}}
+
+/* phone / tablet: press feedback, bigger sparkles, mascot jump */
+.spark-fx.big{font-size:20px}
+@keyframes boing{0%{transform:translateY(0) scale(1,1)}25%{transform:translateY(6px) scale(1.08,.9)}55%{transform:translateY(-26px) scale(.94,1.08)}80%{transform:translateY(0) scale(1.05,.95)}100%{transform:translateY(0) scale(1,1)}}
+.mascot.boing{animation:boing .65s ease-out}
+@media (hover:none) and (pointer:coarse){
+  a,button,.chip{-webkit-tap-highlight-color:transparent}
+  .btn,.chip,.icon-btn,.totop,.links a{transition:transform .12s ease}
+  .btn:active,.chip:active,.icon-btn:active,.totop:active{transform:scale(.93)}
+  .jump:active,.proj:active,.job:active,.cert:active,.sk:active{transform:scale(.985)}
+}
+
+/* mascot is clickable on every device */
+.mascot{cursor:pointer}
+html.has-cursor .mascot{cursor:none}
+
+/* click fireworks canvas */
+#fireworks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998}
