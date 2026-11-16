@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,244 +9,299 @@
 <meta property="og:description" content="Data pipelines, analysis, and 4+ years of production infrastructure experience.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ferryansa.github.io/">
-<meta name="theme-color" content="#fff6e5">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffd85e'/><text x='50' y='72' font-size='64' text-anchor='middle' fill='%231f1b3a' font-family='sans-serif' font-weight='900'>F</text></svg>">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#fff8f1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23ffc9d8'/><text x='50' y='68' font-size='54' text-anchor='middle' fill='%23ec6b95' font-family='sans-serif' font-weight='800'>F</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Zen+Maru+Gothic:wght@700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-
+<canvas id="bg" aria-hidden="true"></canvas>
 <div class="progress" id="progress"></div>
+
 <nav>
   <div class="in">
-    <a href="#top" class="logo">ferryansa</a>
-    <div class="links">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#credentials">Credentials</a>
-      <a href="#contact">Contact</a>
-      <button class="theme" id="theme" type="button" aria-label="Toggle light/dark theme">🌙</button>
+    <a href="#top" class="logo"><b>F</b>ferryansa</a>
+    <div class="links" id="links">
+      <a class="l" href="#about">About</a>
+      <a class="l" href="#projects">Projects</a>
+      <a class="l" href="#experience">Experience</a>
+      <a class="l" href="#credentials">Credentials</a>
+      <a class="l" href="#skills">Skills</a>
+      <a class="l" href="#contact">Contact</a>
+      <button class="icon-btn" id="theme" aria-label="Toggle day/night theme" title="Day / night"><span id="themeIcon">🌙</span></button>
     </div>
+    <button class="icon-btn burger" id="burger" aria-label="Open menu">☰</button>
   </div>
 </nav>
 
 <main id="top">
-
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <p class="eyebrow">Cirebon, Indonesia</p>
-      <h1>Hi, <span class="nm">Ferryansa</span> here<span class="wave" aria-hidden="true">👋</span></h1>
-      <p class="role"><span>Data Analyst</span> <span>Data Engineer</span></p>
-      <p class="typing" aria-live="off"><span id="typed">SQL · Python · Airflow · Kibana</span><span class="caret" aria-hidden="true"></span></p>
-      <p class="lead">I build data pipelines and analyses with SQL, Python, Airflow, and Elasticsearch/Kibana, backed by 4+ years of running production Linux and Windows infrastructure.</p>
+<!-- ================= HERO ================= -->
+<header class="hero" id="hero">
+  <div class="sky" aria-hidden="true"><span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span></div>
+  <div class="wrap">
+    <div>
+      <h1>Hi, <span class="name">Ferryansa</span> here <span class="wave" aria-hidden="true">👋</span></h1>
+      <div class="typing"><span id="typed"></span><span class="caret"></span></div>
+      <p class="lead">I build end-to-end data pipelines and analyses with SQL, Python, Airflow, and Elasticsearch/Kibana, backed by 4+ years of keeping production Linux and Windows infrastructure accurate, consistent, and available.</p>
       <div class="cta">
-        <a class="btn primary" href="#projects">View Projects</a>
-        <a class="btn" href="#contact">Contact</a>
+        <a class="btn primary" href="#projects">View Projects ✨</a>
+        <a class="btn" href="#experience">See Experience</a>
+        <a class="btn" href="#contact">Contact Me</a>
       </div>
       <div class="socials">
-        <a href="https://github.com/ferryansa" target="_blank" rel="noopener" aria-label="GitHub"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-        <a href="https://www.linkedin.com/in/ferryansa" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        <a href="mailto:ferryansa.inbox@gmail.com" aria-label="Email"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a class="icon-btn" href="https://github.com/ferryansa" target="_blank" rel="noopener" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a class="icon-btn" href="https://www.linkedin.com/in/ferryansa" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a class="icon-btn" href="mailto:ferryansa.inbox@gmail.com" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></a>
       </div>
     </div>
-
-    <div class="panel" aria-hidden="true">
-      <div class="bubble">Let's turn data into stories!</div>
-      <svg viewBox="0 0 300 340" class="hero-art">
-        <!-- hoodie -->
-        <path d="M24 340 C24 282 78 262 150 262 C222 262 276 282 276 340Z" fill="#3b4a8f" stroke="#1f1b3a" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M118 262 L150 300 L182 262" fill="#2c3873" stroke="#1f1b3a" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M136 292 V326 M164 292 V326" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-        <!-- neck -->
-        <path d="M130 232 H170 V268 Q150 284 130 268Z" fill="#f5c9a8" stroke="#1f1b3a" stroke-width="5" stroke-linejoin="round"/>
-        <!-- back hair -->
-        <path d="M62 160 C48 70 100 26 150 26 C200 26 252 70 238 160 L224 190 L76 190Z" fill="#2b2d5b" stroke="#1f1b3a" stroke-width="5" stroke-linejoin="round"/>
-        <!-- face -->
-        <path d="M78 128 C78 204 112 246 150 246 C188 246 222 204 222 128 C222 96 192 76 150 76 C108 76 78 96 78 128Z" fill="#ffdcc4" stroke="#1f1b3a" stroke-width="5" stroke-linejoin="round"/>
-        <!-- bangs -->
-        <path d="M70 140 C58 70 104 30 150 30 C196 30 242 70 230 140 L222 112 L204 88 L194 122 L172 84 L150 124 L128 84 L106 122 L96 88 L78 112Z" fill="#2b2d5b" stroke="#1f1b3a" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M112 52 C126 42 144 40 160 44" stroke="#7b86ff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>
-        <!-- headphones -->
-        <path d="M74 150 C66 52 234 52 226 150" stroke="#ff7aa8" stroke-width="9" fill="none" stroke-linecap="round"/>
-        <path d="M74 150 C66 52 234 52 226 150" stroke="#1f1b3a" stroke-width="2" fill="none" stroke-linecap="round" opacity=".35"/>
-        <rect x="58" y="138" width="26" height="46" rx="12" fill="#ff7aa8" stroke="#1f1b3a" stroke-width="5"/>
-        <rect x="216" y="138" width="26" height="46" rx="12" fill="#ff7aa8" stroke="#1f1b3a" stroke-width="5"/>
-        <!-- eyes -->
-        <g>
-          <ellipse cx="118" cy="170" rx="17" ry="22" fill="#fff" stroke="#1f1b3a" stroke-width="4"/>
-          <ellipse cx="118" cy="173" rx="12.5" ry="17" fill="#5f6bff"/>
-          <ellipse cx="118" cy="175" rx="7" ry="10" fill="#1f1b3a"/>
-          <circle cx="111" cy="164" r="5.5" fill="#fff"/><circle cx="124" cy="182" r="2.6" fill="#fff"/>
-          <path d="M98 160 Q118 144 138 160" stroke="#1f1b3a" stroke-width="6" fill="none" stroke-linecap="round"/>
-        </g>
-        <g>
-          <ellipse cx="182" cy="170" rx="17" ry="22" fill="#fff" stroke="#1f1b3a" stroke-width="4"/>
-          <ellipse cx="182" cy="173" rx="12.5" ry="17" fill="#5f6bff"/>
-          <ellipse cx="182" cy="175" rx="7" ry="10" fill="#1f1b3a"/>
-          <circle cx="175" cy="164" r="5.5" fill="#fff"/><circle cx="188" cy="182" r="2.6" fill="#fff"/>
-          <path d="M162 160 Q182 144 202 160" stroke="#1f1b3a" stroke-width="6" fill="none" stroke-linecap="round"/>
-        </g>
-        <!-- blush + mouth -->
-        <ellipse cx="96" cy="208" rx="11" ry="6" fill="#ff8fb3" opacity=".6"/><ellipse cx="204" cy="208" rx="11" ry="6" fill="#ff8fb3" opacity=".6"/>
-        <path d="M137 214 Q150 230 163 214 Z" fill="#c2415f" stroke="#1f1b3a" stroke-width="4" stroke-linejoin="round"/>
-        <!-- sparkles -->
-        <path d="M262 70 l5 14 14 5 -14 5 -5 14 -5 -14 -14 -5 14 -5z" fill="#ffd85e" stroke="#1f1b3a" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M36 96 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4z" fill="#fff" stroke="#1f1b3a" stroke-width="3" stroke-linejoin="round"/>
-      </svg>
+    <div class="stage" aria-hidden="true">
+      <span class="blob"></span><span class="blob b2"></span><span class="blob b3"></span>
+      <svg class="mascot" viewBox="0 0 230 232" role="img" aria-label="Friendly round mascot waving">
+<ellipse cx="115" cy="218" rx="62" ry="9" fill="currentColor" opacity=".08"/>
+<g class="m-body">
+<g class="m-sprout" style="transform-origin:115px 66px"><path d="M115 68 C115 54 113 46 109 40" stroke="#4fc79d" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M109 42 C93 30 74 38 76 54 C92 58 105 52 109 42Z" fill="#7fe0bf"/><path d="M111 48 C117 32 137 28 147 38 C145 54 125 58 111 48Z" fill="#a4ecd2"/></g>
+<rect x="45" y="66" width="140" height="136" rx="64" fill="#ffc2d4"/>
+<ellipse cx="86" cy="96" rx="20" ry="11" fill="#fff" opacity=".4" transform="rotate(-18 86 96)"/>
+<ellipse cx="38" cy="156" rx="13" ry="9.5" fill="#ffc2d4" transform="rotate(30 38 156)"/>
+<g class="m-arm" style="transform-origin:180px 150px"><ellipse cx="196" cy="134" rx="13" ry="9.5" fill="#ffc2d4" transform="rotate(-50 196 134)"/></g>
+<ellipse cx="86" cy="202" rx="17" ry="8.5" fill="#f7a8c0"/><ellipse cx="144" cy="202" rx="17" ry="8.5" fill="#f7a8c0"/>
+<ellipse class="m-eye" cx="92" cy="128" rx="6.5" ry="9" fill="#4a3d4f"/><circle cx="94" cy="124" r="2.4" fill="#fff"/>
+<ellipse class="m-eye" cx="138" cy="128" rx="6.5" ry="9" fill="#4a3d4f"/><circle cx="140" cy="124" r="2.4" fill="#fff"/>
+<ellipse cx="73" cy="148" rx="10" ry="6.5" fill="#ff8fb0" opacity=".55"/><ellipse cx="157" cy="148" rx="10" ry="6.5" fill="#ff8fb0" opacity=".55"/>
+<path d="M103 150 Q115 163 127 150" stroke="#4a3d4f" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+</g></svg>
+      <span class="sticker s1">🐍 Python</span><span class="sticker s2">🐧 Linux</span><span class="sticker s3">📈 Kibana</span><span class="sticker s4">🗄️ SQL</span>
+      <span class="spark k1">✦</span><span class="spark k2">✦</span><span class="spark k3">✦</span>
     </div>
   </div>
+  <a class="scroll" href="#about" aria-label="Scroll down"></a>
 </header>
 
-<!-- ============ ABOUT ============ -->
-<section id="about">
+<div class="marquee" aria-hidden="true"><div class="mq-track" id="marquee"></div></div>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="tint t-pink">
   <div class="wrap">
-    <div class="head"><span class="ep">EP.01</span><h2>About</h2><span class="jp" aria-hidden="true">プロフィール</span></div>
-    <p class="about-text">I started in infrastructure, where I learned why data has to be accurate, consistent, and available. Now I build the pipelines and analysis on top of that foundation: from raw data to dashboards, with quality checks along the way.</p>
-    <div class="stats">
-      <div class="stat"><b data-count="4" data-suffix="+">4+</b><span>Years of IT experience</span></div>
-      <div class="stat"><b data-count="100" data-suffix="+">100+</b><span>Virtual machines administered</span></div>
-      <div class="stat"><b data-count="2">2</b><span>Featured data projects</span></div>
+    <div class="head reveal">
+      <h2>From infrastructure to <em>data</em> 🌸</h2>
+      <p class="sub">Years of running production and disaster-recovery systems taught me,</p>
+      <p class="sub">why data has to be accurate, consistent, and available.</p>
+      <p class="sub">Now I build the pipelines and analysis on top of that foundation.</p>
+    </div>
+    <div class="bento">
+      <div class="card b-what reveal">
+        <div class="ic">🔎</div><h3>What I Do</h3>
+        <ul><li>Build data pipelines: PostgreSQL → Airflow → Elasticsearch/Kibana</li><li>Keep data consistent across production and DR systems</li><li>Automate Linux/Windows operations with Bash, Python, and Ansible</li></ul>
+      </div>
+      <a class="card jump stat s1 reveal" href="#experience"><i class="arr">↗</i><span class="ic">⏱️</span><b data-count="4" data-suffix="+">0</b><span class="l">Years of IT experience</span></a>
+      <a class="card jump stat s2 reveal" href="#j-inovasi"><i class="arr">↗</i><span class="ic">🖥️</span><b data-count="100" data-suffix="+">0</b><span class="l">Virtual machines administered</span></a>
+      <a class="card jump stat s3 reveal" href="#projects"><i class="arr">↗</i><span class="ic">🧪</span><b data-count="2">0</b><span class="l">Featured data projects</span></a>
+      <a class="card jump stat s4 reveal" href="#cert-list"><i class="arr">↗</i><span class="ic">🏅</span><b data-count="7">0</b><span class="l">Certifications &amp; simulations</span></a>
+    </div>
+
+    <div class="road reveal">
+      <div class="road-head">
+        <span class="pill-label" style="--t:var(--lav)">Level up</span>
+        <h3>Currently <em>learning</em></h3>
+      </div>
+      <ol class="road-track">
+        <li class="stop"><span class="bub">☁️</span><span class="t"><b>Cloud data warehouses</b><small>BigQuery · Snowflake</small></span></li>
+        <li class="stop"><span class="bub">🧱</span><span class="t"><b>dbt &amp; data modeling</b><small>analytics engineering</small></span></li>
+        <li class="stop"><span class="bub">⚡</span><span class="t"><b>Spark &amp; Kafka</b><small>batch + real-time streaming</small></span></li>
+        <li class="stop"><span class="bub">📊</span><span class="t"><b>Power BI</b><small>business dashboards</small></span></li>
+        <li class="stop"><span class="bub">🧮</span><span class="t"><b>Advanced SQL</b><small>window functions · optimization</small></span></li>
+        <li class="stop"><span class="bub">🤖</span><span class="t"><b>MLOps &amp; LLM/RAG basics</b><small>AI-ready data pipelines</small></span></li>
+      </ol>
     </div>
   </div>
 </section>
 
-<!-- ============ EXPERIENCE ============ -->
-<section id="experience" class="alt">
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="tint t-sky">
   <div class="wrap">
-    <div class="head"><span class="ep">EP.02</span><h2>Experience</h2><span class="jp" aria-hidden="true">経歴</span></div>
-
-    <article class="job">
-      <div class="job-head"><h3>Data Center Engineer</h3><span class="date">Apr 2025 – Jul 2025</span></div>
-      <p class="where">PT Lion Super Indo · Jakarta</p>
-      <ul>
-        <li>Ran daily health checks on production and DR data centers (HPE/Dell), including AD replication, DNS/DHCP, and backup verification.</li>
-        <li>Migrated Active Directory, DNS, DHCP, and reverse proxy from bare-metal to VMware vSphere, validating data consistency before and after cutover.</li>
-        <li>Supported a business-continuity proof of concept (Veeam DRaaS) and proposed IPAM for centralized IP and asset tracking.</li>
-      </ul>
-    </article>
-
-    <article class="job">
-      <div class="job-head"><h3>IT Consultant</h3><span class="date">Feb 2021 – Aug 2024</span></div>
-      <p class="where">PT Inovasi Informatika Indonesia · Jakarta</p>
-      <ul>
-        <li>Administered enterprise RHEL infrastructure with Red Hat Satellite and OpenStack, maintaining configuration data for 100+ virtual machines.</li>
-        <li>Automated patching and provisioning with Ansible; wrote Bash/Python scripts to process logs, detect anomalies, and generate reports.</li>
-        <li>Reduced average downtime per incident and delivered internal Red Hat training that improved team certification pass rates.</li>
-      </ul>
-    </article>
-
-    <div class="earlier">
-      <h3>Earlier</h3>
-      <ul>
-        <li><p><b>Infrastructure &amp; Standardization Intern</b>, Telkom Direktorat Digital Business</p><span>Jul – Dec 2020</span></li>
-        <li><p><b>Coordinator &amp; Teaching Assistant</b>, SISJAR Laboratory</p><span>Aug 2018 – May 2020</span></li>
-        <li><p><b>Network Infrastructure Validation Intern</b>, Kementerian Sosial RI</p><span>Jun – Aug 2019</span></li>
-      </ul>
+    <div class="head reveal">
+      <h2>Featured <em>projects</em> 🚀</h2>
+      <p class="sub">Projects from my bootcamp:</p>
+      <p class="sub">data engineering pipeline and deep learning classifier.</p>
     </div>
-  </div>
-</section>
-
-<!-- ============ PROJECTS ============ -->
-<section id="projects">
-  <div class="wrap">
-    <div class="head"><span class="ep">EP.03</span><h2>Projects</h2><span class="jp" aria-hidden="true">作品</span></div>
     <div class="proj-grid">
-      <article class="card proj">
-        <h3>Global Bike Sales Analysis Pipeline</h3>
-        <p class="meta">Data engineering · Dec 2024</p>
-        <p>An end-to-end pipeline for global bike sales data (Kaggle, 2013–2023): stored in PostgreSQL, processed with Airflow ETL, validated with Great Expectations, indexed into Elasticsearch, and visualized in Kibana.</p>
-        <ul>
-          <li>The US and Australia are the most profitable markets</li>
-          <li>Ages 25–64 generate 86% of revenue</li>
-          <li>Discounts show diminishing returns beyond 10–20%</li>
-        </ul>
-        <p class="stack">PostgreSQL · Airflow · Great Expectations · Elasticsearch · Kibana</p>
-        <div class="links-row"><a class="btn small" href="https://github.com/ferryansa/global-bike-sales-analysis-pipeline" target="_blank" rel="noopener">GitHub →</a></div>
+      <article class="card proj reveal" id="p-bike">
+        <div class="thumb t1"><svg viewBox="0 0 330 178" role="img" aria-label="Pipeline: PostgreSQL, Airflow, Great Expectations, Elasticsearch, Kibana" preserveAspectRatio="xMidYMid meet"><rect class="nd" x="22" y="52" width="50" height="50" rx="18"/><text x="47.0" y="81.0">PG</text><path class="ln" d="M75 77.0 H83"/><rect class="nd" x="86" y="52" width="50" height="50" rx="18"/><text x="111.0" y="81.0">AF</text><path class="ln" d="M139 77.0 H147"/><rect class="nd" x="150" y="52" width="50" height="50" rx="18"/><text x="175.0" y="81.0">GE</text><path class="ln" d="M203 77.0 H211"/><rect class="nd" x="214" y="52" width="50" height="50" rx="18"/><text x="239.0" y="81.0">ES</text><path class="ln" d="M267 77.0 H275"/><rect class="nd" x="278" y="52" width="50" height="50" rx="18"/><text x="303.0" y="81.0">KB</text><text x="165" y="138" style="font-weight:700;opacity:.6;font-size:10px;font-family:var(--sans)">PostgreSQL → Airflow → Great Expectations → Elasticsearch → Kibana</text></svg></div>
+        <div class="body">
+          <h3>Global Bike Sales Analysis Pipeline</h3>
+          <span class="when">Dec 2024</span>
+          <p>An end-to-end pipeline analyzing global bike sales data (Kaggle, 2013–2023, 33 columns): data stored in PostgreSQL, processed with Apache Airflow ETL, validated with Great Expectations, indexed into Elasticsearch, and visualized in Kibana dashboards.</p>
+          <ul class="find"><li>The US &amp; Australia are the most profitable markets</li><li>Ages 25–64 generate 86% of revenue</li><li>Discounts show diminishing returns beyond 10–20%</li></ul>
+          <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Airflow</span><span class="tag">Great Expectations</span><span class="tag">Elasticsearch</span><span class="tag">Kibana</span></div>
+          <div class="actions"><a class="go" href="https://github.com/ferryansa/global-bike-sales-analysis-pipeline" target="_blank" rel="noopener">View on GitHub →</a></div>
+        </div>
       </article>
-
-      <article class="card proj">
-        <h3>Bird Species Classification</h3>
-        <p class="meta">Deep learning · Dec 2024</p>
-        <p>Image classifier built with MobileNetV2 transfer learning (TensorFlow/Keras) on a Kaggle dataset, with a live demo on Hugging Face Spaces.</p>
-        <ul>
-          <li>100% accuracy on test data</li>
-          <li>Recognizes species across varied poses and backgrounds</li>
-        </ul>
-        <p class="stack">MobileNetV2 · TensorFlow · Keras · Transfer Learning</p>
-        <div class="links-row">
-          <a class="btn small" href="https://github.com/ferryansa/bird-species-classification" target="_blank" rel="noopener">GitHub →</a>
-          <a class="btn small" href="https://huggingface.co/spaces/Ferryansa/bird-species-classification" target="_blank" rel="noopener">Live demo →</a>
+      <article class="card proj reveal" id="p-bird">
+        <div class="thumb t2"><svg viewBox="0 0 330 178" role="img" aria-label="Neural network illustration" preserveAspectRatio="xMidYMid meet"><line class="nl" x1="70" y1="48" x2="140" y2="34"/><line class="nl" x1="70" y1="48" x2="140" y2="69"/><line class="nl" x1="70" y1="48" x2="140" y2="108"/><line class="nl" x1="70" y1="48" x2="140" y2="143"/><line class="nl" x1="70" y1="89" x2="140" y2="34"/><line class="nl" x1="70" y1="89" x2="140" y2="69"/><line class="nl" x1="70" y1="89" x2="140" y2="108"/><line class="nl" x1="70" y1="89" x2="140" y2="143"/><line class="nl" x1="70" y1="130" x2="140" y2="34"/><line class="nl" x1="70" y1="130" x2="140" y2="69"/><line class="nl" x1="70" y1="130" x2="140" y2="108"/><line class="nl" x1="70" y1="130" x2="140" y2="143"/><line class="nl" x1="140" y1="34" x2="210" y2="48"/><line class="nl" x1="140" y1="34" x2="210" y2="89"/><line class="nl" x1="140" y1="34" x2="210" y2="130"/><line class="nl" x1="140" y1="69" x2="210" y2="48"/><line class="nl" x1="140" y1="69" x2="210" y2="89"/><line class="nl" x1="140" y1="69" x2="210" y2="130"/><line class="nl" x1="140" y1="108" x2="210" y2="48"/><line class="nl" x1="140" y1="108" x2="210" y2="89"/><line class="nl" x1="140" y1="108" x2="210" y2="130"/><line class="nl" x1="140" y1="143" x2="210" y2="48"/><line class="nl" x1="140" y1="143" x2="210" y2="89"/><line class="nl" x1="140" y1="143" x2="210" y2="130"/><line class="nl" x1="210" y1="48" x2="275" y2="69"/><line class="nl" x1="210" y1="48" x2="275" y2="108"/><line class="nl" x1="210" y1="89" x2="275" y2="69"/><line class="nl" x1="210" y1="89" x2="275" y2="108"/><line class="nl" x1="210" y1="130" x2="275" y2="69"/><line class="nl" x1="210" y1="130" x2="275" y2="108"/><circle class="nn p" cx="70" cy="48" r="8" style="animation-delay:0.0s"/><circle class="nn" cx="70" cy="89" r="8" style="animation-delay:0.4s"/><circle class="nn" cx="70" cy="130" r="8" style="animation-delay:0.8s"/><circle class="nn p" cx="140" cy="34" r="8" style="animation-delay:1.2000000000000002s"/><circle class="nn" cx="140" cy="69" r="8" style="animation-delay:1.6s"/><circle class="nn" cx="140" cy="108" r="8" style="animation-delay:0.0s"/><circle class="nn p" cx="140" cy="143" r="8" style="animation-delay:0.4s"/><circle class="nn" cx="210" cy="48" r="8" style="animation-delay:0.8s"/><circle class="nn" cx="210" cy="89" r="8" style="animation-delay:1.2000000000000002s"/><circle class="nn p" cx="210" cy="130" r="8" style="animation-delay:1.6s"/><circle class="nn" cx="275" cy="69" r="8" style="animation-delay:0.0s"/><circle class="nn" cx="275" cy="108" r="8" style="animation-delay:0.4s"/></svg></div>
+        <div class="body">
+          <h3>Bird Species Classification</h3>
+          <span class="when">Dec 2024</span>
+          <p>Bird species image classification with MobileNetV2 (transfer learning, TensorFlow/Keras) on a Kaggle dataset, then improved through a refined model. Includes a demo on Hugging Face Spaces.</p>
+          <span class="hl">100% accuracy on test data</span>
+          <ul class="find"><li>Recognizes species across varied poses &amp; backgrounds</li><li>Applications suggested: conservation, education, ecotourism</li></ul>
+          <div class="tags"><span class="tag">MobileNetV2</span><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">Transfer Learning</span></div>
+          <div class="actions"><a class="go" href="https://github.com/ferryansa/bird-species-classification" target="_blank" rel="noopener">View on GitHub →</a><a class="go" href="https://huggingface.co/spaces/Ferryansa/bird-species-classification" target="_blank" rel="noopener">Live demo →</a></div>
         </div>
       </article>
     </div>
-  </div>
-</section>
-
-<!-- ============ SKILLS ============ -->
-<section id="skills" class="alt">
-  <div class="wrap">
-    <div class="head"><span class="ep">EP.04</span><h2>Skills</h2><span class="jp" aria-hidden="true">スキル</span></div>
-    <div class="skill-grid">
-      <div class="sk-box" data-cat="data"><h3>Data &amp; Analytics</h3><ul><li>Python</li><li>SQL</li><li>Pandas</li><li>Statistics</li><li>Excel / Google Sheets</li><li>Kibana</li><li>Matplotlib</li><li>Seaborn</li></ul></div>
-      <div class="sk-box" data-cat="de"><h3>Data Engineering</h3><ul><li>PostgreSQL</li><li>Apache Airflow</li><li>ETL</li><li>Great Expectations</li><li>Elasticsearch</li></ul></div>
-      <div class="sk-box" data-cat="ml"><h3>Machine Learning</h3><ul><li>TensorFlow / Keras</li><li>MobileNetV2</li><li>Hugging Face Spaces</li></ul></div>
-      <div class="sk-box" data-cat="infra"><h3>Infrastructure &amp; Automation</h3><ul><li>Linux (RHEL)</li><li>Windows Server &amp; AD</li><li>VMware vSphere</li><li>OpenStack</li><li>Red Hat Satellite</li><li>Ansible</li><li>Bash</li><li>Grafana</li><li>ELK Stack</li></ul></div>
-    </div>
-    <div class="learning">
-      <h3>Currently learning</h3>
-      <ul>
-        <li>BigQuery / Snowflake</li><li>dbt</li><li>Spark &amp; Kafka</li><li>Power BI</li><li>Advanced SQL</li><li>MLOps &amp; LLM/RAG basics</li>
-      </ul>
+    <div class="pipe reveal">
+      <small>How I see an end-to-end data flow</small>
+      <span class="st">Raw Data</span><span class="ar">→</span><span class="st">Ingest / ETL</span><span class="ar">→</span><span class="st">Clean &amp; Validate</span><span class="ar">→</span><span class="st">Model / Analyze</span><span class="ar">→</span><span class="st">Visualize</span><span class="ar">→</span><span class="st">Production</span>
     </div>
   </div>
 </section>
 
-<!-- ============ CREDENTIALS ============ -->
-<section id="credentials">
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience">
   <div class="wrap">
-    <div class="head"><span class="ep">EP.05</span><h2>Credentials</h2><span class="jp" aria-hidden="true">資格</span></div>
-    <div class="cred-grid">
-      <div>
-        <h3 class="sub-h">Education</h3>
-        <div class="edu"><b>Bachelor of Information Systems</b><span>Telkom University, Bandung · 2016–2020</span><em>GPA 3.64 / 4.00</em></div>
-        <div class="edu"><b>Full-Time Data Science Bootcamp</b><span>Hacktiv8 Indonesia · Sep–Dec 2024</span><em>Final grade 87.77 / 100</em></div>
-      </div>
-      <div>
-        <h3 class="sub-h">Certifications</h3>
-        <ul class="certs">
-          <li><b>SQL (Intermediate)</b><span>HackerRank · Feb 2025</span></li>
-          <li><b>PwC Digital Intelligence Job Simulation</b><span>Forage · Jan 2025</span></li>
-          <li><b>Problem Solving (Basic)</b><span>HackerRank · Jan 2025</span></li>
-          <li><b>BCG X Data Science Job Simulation</b><span>Forage · Dec 2024</span></li>
-          <li><b>Python (Basic)</b><span>HackerRank · Nov 2024</span></li>
-          <li><b>RHCE — Ansible 2.8</b><span>Red Hat · May 2021</span></li>
-          <li><b>RHCSA — RHEL 8</b><span>Red Hat · Mar 2021</span></li>
+    <div class="head reveal">
+      <h2>Where I've <em>worked</em> 🧳</h2>
+      <p class="sub">Data center operations, enterprise Linux consulting,</p>
+      <p class="sub">and hands-on infrastructure research.</p>
+    </div>
+    <div class="timeline">
+      <article class="card job reveal" id="j-lion">
+        <div class="job-top"><span class="kind now">Most recent</span><span class="kind">Data Center</span><span class="date">Apr 2025 – Jul 2025</span></div>
+        <div class="job-title"><span class="av"><img src="img/superindo.png" alt="PT Lion Super Indo logo" width="56" height="56" loading="lazy"></span><div><h3>Data Center Engineer</h3><div class="where">PT Lion Super Indo</div><div class="loc">Jakarta, Indonesia</div></div></div>
+        <ul>
+          <li>Ran daily health checks on production and DR data centers (HPE/Dell): server status, AD replication, DNS/DHCP, and backup verification across mixed Windows and Linux.</li>
+          <li>Migrated Active Directory, DNS, DHCP, and reverse proxy from bare-metal to VMware vSphere, validating data consistency before and after cutover.</li>
+          <li>Supported a business-continuity proof of concept (Veeam DRaaS, ARR load balancing) and proposed IPAM adoption for centralized IP and asset tracking.</li>
+          <li>Managed SSL certificate renewals and escalated SAN hardware issues to HPE and Dell.</li>
         </ul>
-      </div>
+        <div class="stack"><small>Tools</small><span class="tag">VMware vSphere</span><span class="tag">Active Directory</span><span class="tag">DNS/DHCP</span><span class="tag">HPE / Dell</span><span class="tag">Veeam DRaaS</span><span class="tag">IPAM</span></div>
+      </article>
+
+      <article class="card job reveal" id="j-inovasi">
+        <div class="job-top"><span class="kind">Consulting</span><span class="date">Feb 2021 – Aug 2024</span></div>
+        <div class="job-title"><span class="av"><img src="img/i3.png" alt="PT Inovasi Informatika Indonesia logo" width="56" height="56" loading="lazy"></span><div><h3>IT Consultant</h3><div class="where">PT Inovasi Informatika Indonesia</div><div class="loc">Jakarta, Indonesia</div></div></div>
+        <ul>
+          <li>Administered enterprise RHEL infrastructure with Red Hat Satellite and OpenStack, maintaining configuration data for 100+ virtual machines.</li>
+          <li>Automated patching and provisioning with Ansible; managed Apache/Nginx web servers, Linux firewalls, and email servers.</li>
+          <li>Wrote Bash/Python scripts to process system logs, detect anomalies, and generate automated reports.</li>
+          <li>Reduced average downtime per incident through Linux, networking, and storage support, and delivered internal Red Hat training that improved team certification pass rates.</li>
+        </ul>
+        <div class="stack"><small>Tools</small><span class="tag">Linux (RHEL)</span><span class="tag">Red Hat Satellite</span><span class="tag">OpenStack</span><span class="tag">Ansible</span><span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Apache / Nginx</span></div>
+      </article>
+
+      <article class="card job reveal" id="j-telkom">
+        <div class="job-top"><span class="kind">Internship</span><span class="date">Jul 2020 – Dec 2020</span></div>
+        <div class="job-title"><span class="av"><img src="img/ddb.png" alt="Telkom Direktorat Digital Business logo" width="56" height="56" loading="lazy"></span><div><h3>Infrastructure &amp; Standardization Intern</h3><div class="where">Telkom Direktorat Digital Business</div><div class="loc">Bandung, Indonesia</div></div></div>
+        <ul>
+          <li>Studied and documented modern telco infrastructure: BRAS, Cloud Central Office, and CUSP.</li>
+          <li>Tested NextEPC and StarlingX on Linux for telco-cloud feasibility, and assisted in evaluating Direct Cloud Connect for enterprise use cases.</li>
+        </ul>
+      </article>
+
+      <article class="card job reveal" id="j-sisjar">
+        <div class="job-top"><span class="kind">Lab &amp; Teaching</span><span class="date">Aug 2018 – May 2020</span></div>
+        <div class="job-title"><span class="av"><img src="img/sisjar.png" alt="SISJAR Laboratory logo" width="56" height="56" loading="lazy"></span><div><h3>Coordinator &amp; Teaching Assistant</h3><div class="where">SISJAR Laboratory</div><div class="loc">Bandung, Indonesia</div></div></div>
+        <ul>
+          <li>Coordinated lab activities, research projects, and IT competitions, and managed internal documentation and resource planning.</li>
+          <li>Guided 100+ students per semester in network design, Linux-based network management, and IT security.</li>
+        </ul>
+      </article>
+
+      <article class="card job reveal" id="j-kemensos">
+        <div class="job-top"><span class="kind">Internship</span><span class="date">Jun 2019 – Aug 2019</span></div>
+        <div class="job-title"><span class="av"><img src="img/kemensos.png" alt="Kementerian Sosial RI logo" width="56" height="56" loading="lazy"></span><div><h3>Network Infrastructure Validation Intern</h3><div class="where">Kementerian Sosial RI</div><div class="loc">Jakarta, Indonesia</div></div></div>
+        <ul>
+          <li>Analyzed server and traffic logs from the e-PKH application to find network and application performance issues.</li>
+          <li>Assisted in redesigning the on-premises network, improving availability and load distribution.</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
+<!-- ================= CREDENTIALS ================= -->
+<section id="credentials" class="tint t-butter">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Education &amp; <em>certifications</em> 🎓</h2>
+      <p class="sub">Formal education, a full-time data science bootcamp,</p>
+      <p class="sub">and certifications across data and systems.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="card reveal" id="c-uni"><span class="edu-logo"><img src="img/telkom-university.png" alt="Telkom University logo" width="64" height="64" loading="lazy"></span><h3>Bachelor of Information Systems</h3>
+        <p>Telkom University, Bandung<br><span class="when">Aug 2016 – Jul 2020</span></p><div class="big">GPA 3.64 / 4.00</div></div>
+      <div class="card reveal" id="c-boot"><span class="edu-logo"><img src="img/hacktiv8.png" alt="Hacktiv8 logo" width="64" height="64" loading="lazy"></span><h3>Full-Time Data Science Bootcamp</h3>
+        <p>Hacktiv8 Indonesia, Jakarta<br><span class="when">Sep 2024 – Dec 2024</span></p><div class="big">Final grade 87.77 / 100</div></div>
+    </div>
+    <h3 class="sub-h reveal">Certifications</h3>
+    <div class="certs reveal" id="cert-list">
+      <div class="cert"><span class="iss hr">HR</span><span><b>SQL (Intermediate)</b><small>HackerRank · Feb 2025</small></span></div>
+      <div class="cert"><span class="iss fg">PwC</span><span><b>Digital Intelligence Job Simulation</b><small>Forage · Jan 2025</small></span></div>
+      <div class="cert"><span class="iss hr">HR</span><span><b>Problem Solving (Basic)</b><small>HackerRank · Jan 2025</small></span></div>
+      <div class="cert"><span class="iss fg">BCG</span><span><b>BCG X Data Science Job Simulation</b><small>Forage · Dec 2024</small></span></div>
+      <div class="cert"><span class="iss hr">HR</span><span><b>Python (Basic)</b><small>HackerRank · Nov 2024</small></span></div>
+      <div class="cert"><span class="iss rh">RH</span><span><b>RHCE — Ansible 2.8</b><small>Red Hat · May 2021</small></span></div>
+      <div class="cert"><span class="iss rh">RH</span><span><b>RHCSA — Red Hat Enterprise Linux 8</b><small>Red Hat · Mar 2021</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Tools &amp; <em>expertise</em> 🧰</h2>
+      <p class="sub">Data skills on top of a solid systems foundation.</p>
+    </div>
+    <div class="filters reveal" id="filters" role="tablist">
+      <button class="chip on" data-f="all">✨ All</button>
+      <button class="chip" data-f="prog">🐍 Programming</button>
+      <button class="chip" data-f="de">🛠️ Data Engineering</button>
+      <button class="chip" data-f="db">🗄️ Databases</button>
+      <button class="chip" data-f="viz">📊 Visualization</button>
+      <button class="chip" data-f="ml">🧠 Machine Learning</button>
+      <button class="chip" data-f="infra">🖥️ Infrastructure</button>
+      <button class="chip" data-f="auto">⚙️ Automation</button>
+    </div>
+    <div class="skills reveal" id="skills-grid"></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
 <section id="contact" class="contact">
   <div class="wrap">
-    <div class="head"><span class="ep">FINAL</span><h2>Contact</h2><span class="jp" aria-hidden="true">連絡先</span></div>
-    <a class="mail" href="mailto:ferryansa.inbox@gmail.com">ferryansa.inbox@gmail.com</a>
-    <div class="cta">
-      <a class="btn" href="https://www.linkedin.com/in/ferryansa" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/ferryansa" target="_blank" rel="noopener">GitHub</a>
+    <div class="contact-box reveal">
+      <svg class="mascot" viewBox="0 0 230 232" role="img" aria-label="Friendly round mascot waving">
+<ellipse cx="115" cy="218" rx="62" ry="9" fill="currentColor" opacity=".08"/>
+<g class="m-body">
+<g class="m-sprout" style="transform-origin:115px 66px"><path d="M115 68 C115 54 113 46 109 40" stroke="#4fc79d" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M109 42 C93 30 74 38 76 54 C92 58 105 52 109 42Z" fill="#7fe0bf"/><path d="M111 48 C117 32 137 28 147 38 C145 54 125 58 111 48Z" fill="#a4ecd2"/></g>
+<rect x="45" y="66" width="140" height="136" rx="64" fill="#ffc2d4"/>
+<ellipse cx="86" cy="96" rx="20" ry="11" fill="#fff" opacity=".4" transform="rotate(-18 86 96)"/>
+<ellipse cx="38" cy="156" rx="13" ry="9.5" fill="#ffc2d4" transform="rotate(30 38 156)"/>
+<g class="m-arm" style="transform-origin:180px 150px"><ellipse cx="196" cy="134" rx="13" ry="9.5" fill="#ffc2d4" transform="rotate(-50 196 134)"/></g>
+<ellipse cx="86" cy="202" rx="17" ry="8.5" fill="#f7a8c0"/><ellipse cx="144" cy="202" rx="17" ry="8.5" fill="#f7a8c0"/>
+<ellipse class="m-eye" cx="92" cy="128" rx="6.5" ry="9" fill="#4a3d4f"/><circle cx="94" cy="124" r="2.4" fill="#fff"/>
+<ellipse class="m-eye" cx="138" cy="128" rx="6.5" ry="9" fill="#4a3d4f"/><circle cx="140" cy="124" r="2.4" fill="#fff"/>
+<ellipse cx="73" cy="148" rx="10" ry="6.5" fill="#ff8fb0" opacity=".55"/><ellipse cx="157" cy="148" rx="10" ry="6.5" fill="#ff8fb0" opacity=".55"/>
+<path d="M103 150 Q115 163 127 150" stroke="#4a3d4f" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+</g></svg>
+      <a class="mail" href="mailto:ferryansa.inbox@gmail.com">ferryansa.inbox@gmail.com</a>
+      <div class="cta">
+        <a class="btn" href="https://www.linkedin.com/in/ferryansa" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/ferryansa" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap">© 2026 Ferryansa · Cirebon, Indonesia</div></footer>
-<script src="script.js"></script>
+<footer><div class="wrap">© <span id="yr"></span> Ferryansa · Indonesia · Made with ☕ and 🌸</div></footer>
+
+<button class="icon-btn totop" id="totop" aria-label="Back to top">↑</button>
+
+<script src="script.js?v=3"></script>
 </body>
 </html>
