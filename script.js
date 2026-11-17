@@ -5,7 +5,8 @@
    - Ticker words:       MARQUEE
    - Skills list:        SK  [name, category, subtitle, jump target id or null]
      (skill tiles are not clickable)
-   - Cursor / click / touch effects: set CURSOR_FX, CLICK_FX, TOUCH_FX, MASCOT_FX, HAPTIC below to true or false
+   - Cursor / click / touch effects: set CURSOR_FX, CLICK_FX, TOUCH_FX, MASCOT_FX, HAPTIC below
+   - Background music: MUSIC_FILE, MUSIC_VOLUME, MUSIC_AUTOPLAY, MUSIC_CREDIT below to true or false
    ========================================================== */
 (function(){
   'use strict';
@@ -18,7 +19,14 @@
   var CLICK_FX  = true;   // small sparkle burst on click
   var TOUCH_FX  = true;   // phone/tablet: tap sparkles + tap the mascot to make it jump
   var MASCOT_FX = true;   // click / tap the mascot and it jumps (laptop + phone)
-  var HAPTIC    = true;   // phone/tablet: tiny vibration on tap (Android only; iPhone ignores it)
+  var HAPTIC    = true;
+
+  /* ---------- Background music ---------- */
+  var MUSIC_FILE   = 'bgm.mp3';        // put your mp3 next to index.html (set to '' to remove the music button)
+  var MUSIC_AUTOPLAY = true;           // try to start when the page opens (see note in the music code)
+  var MUSIC_VOLUME = 0.25;             // 0 (silent) to 1 (full)
+  var MUSIC_CREDIT = '';               // e.g. 'Music: "Title" by Artist (Pixabay)'; shown in the footer when set
+   // phone/tablet: tiny vibration on tap (Android only; iPhone ignores it)
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
@@ -228,47 +236,47 @@
 
   /* ---------- Click / tap fireworks (hanabi) ---------- */
   if(((fine && CLICK_FX) || (touch && TOUCH_FX)) && !reduce){
-    var fx=document.createElement('canvas'); fx.id='fireworks'; fx.setAttribute('aria-hidden','true');
-    document.body.appendChild(fx);
-    var g=fx.getContext('2d'), dpr=Math.min(window.devicePixelRatio||1,2), FW=0, FH=0, bits=[], running=false;
-    var fit=function(){FW=innerWidth;FH=innerHeight;fx.width=FW*dpr;fx.height=FH*dpr;g.setTransform(dpr,0,0,dpr,0,0)};
-    fit(); addEventListener('resize',fit);
-    var COLORS=['--pink-d','--lav-d','--butter-d','--sky-d','--mint-d','--peach-d'];
-    var pick=function(){var cs=getComputedStyle(document.documentElement);return COLORS.map(function(v){return cs.getPropertyValue(v).trim()||'#ec6b95'})};
-    var burst=function(x,y){
-      var cols=pick(), n=touch?42:34, R=touch?7.2:6.2, base=cols[Math.floor(Math.random()*cols.length)];
+    var fwCanvas=document.createElement('canvas'); fwCanvas.id='fireworks'; fwCanvas.setAttribute('aria-hidden','true');
+    document.body.appendChild(fwCanvas);
+    var fwCtx=fwCanvas.getContext('2d'), fwDpr=Math.min(window.devicePixelRatio||1,2), fwW=0, fwH=0, fwBits=[], fwRunning=false;
+    var fwFit=function(){fwW=innerWidth;fwH=innerHeight;fwCanvas.width=fwW*fwDpr;fwCanvas.height=fwH*fwDpr;fwCtx.setTransform(fwDpr,0,0,fwDpr,0,0)};
+    fwFit(); addEventListener('resize',fwFit);
+    var FW_COLORS=['--pink-d','--lav-d','--butter-d','--sky-d','--mint-d','--peach-d'];
+    var fwPick=function(){var cs=getComputedStyle(document.documentElement);return FW_COLORS.map(function(v){return cs.getPropertyValue(v).trim()||'#ec6b95'})};
+    var fwBurst=function(x,y){
+      var cols=fwPick(), n=touch?42:34, R=touch?7.2:6.2, base=cols[Math.floor(Math.random()*cols.length)];
       for(var i=0;i<n;i++){
         var a=(Math.PI*2/n)*i+Math.random()*.15, v=R*(.55+Math.random()*.45);
-        bits.push({x:x,y:y,px:x,py:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,decay:.011+Math.random()*.007,
+        fwBits.push({x:x,y:y,px:x,py:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,decay:.011+Math.random()*.007,
           c:i%3===0?cols[Math.floor(Math.random()*cols.length)]:base,w:3+Math.random()*2,tw:Math.random()<.35});
       }
       // soft flash ring
-      bits.push({ring:true,x:x,y:y,r:4,life:1,decay:.07,c:base});
-      if(!running){running=true;requestAnimationFrame(tick)}
+      fwBits.push({ring:true,x:x,y:y,r:4,life:1,decay:.07,c:base});
+      if(!fwRunning){fwRunning=true;requestAnimationFrame(fwTick)}
     };
-    var tick=function(){
-      g.clearRect(0,0,FW,FH);
-      for(var i=bits.length-1;i>=0;i--){
-        var p=bits[i];
+    var fwTick=function(){
+      fwCtx.clearRect(0,0,fwW,fwH);
+      for(var i=fwBits.length-1;i>=0;i--){
+        var p=fwBits[i];
         if(p.ring){
           p.r+=5; p.life-=p.decay;
-          if(p.life<=0){bits.splice(i,1);continue}
-          g.globalAlpha=p.life*.5; g.strokeStyle=p.c; g.lineWidth=2; g.beginPath(); g.arc(p.x,p.y,p.r,0,6.283); g.stroke();
+          if(p.life<=0){fwBits.splice(i,1);continue}
+          fwCtx.globalAlpha=p.life*.5; fwCtx.strokeStyle=p.c; fwCtx.lineWidth=2; fwCtx.beginPath(); fwCtx.arc(p.x,p.y,p.r,0,6.283); fwCtx.stroke();
           continue;
         }
         p.px=p.x; p.py=p.y;
         p.vx*=.95; p.vy=p.vy*.95+.06;      // friction + gravity
         p.x+=p.vx; p.y+=p.vy; p.life-=p.decay;
-        if(p.life<=0){bits.splice(i,1);continue}
+        if(p.life<=0){fwBits.splice(i,1);continue}
         var al=p.tw?p.life*(.5+.5*Math.sin(p.life*40)):p.life;
-        g.globalAlpha=Math.max(al,0); g.strokeStyle=p.c; g.fillStyle=p.c; g.lineCap='round'; g.lineWidth=p.w*p.life+.4;
-        g.beginPath(); g.moveTo(p.px,p.py); g.lineTo(p.x,p.y); g.stroke();       // trail
-        g.beginPath(); g.arc(p.x,p.y,p.w*.55*p.life+.3,0,6.283); g.fill();       // head
+        fwCtx.globalAlpha=Math.max(al,0); fwCtx.strokeStyle=p.c; fwCtx.fillStyle=p.c; fwCtx.lineCap='round'; fwCtx.lineWidth=p.w*p.life+.4;
+        fwCtx.beginPath(); fwCtx.moveTo(p.px,p.py); fwCtx.lineTo(p.x,p.y); fwCtx.stroke();       // trail
+        fwCtx.beginPath(); fwCtx.arc(p.x,p.y,p.w*.55*p.life+.3,0,6.283); fwCtx.fill();       // head
       }
-      g.globalAlpha=1;
-      if(bits.length) requestAnimationFrame(tick); else {running=false;g.clearRect(0,0,FW,FH)}
+      fwCtx.globalAlpha=1;
+      if(fwBits.length) requestAnimationFrame(fwTick); else {fwRunning=false;fwCtx.clearRect(0,0,fwW,fwH)}
     };
-    document.addEventListener('click',function(e){burst(e.clientX,e.clientY)});
+    document.addEventListener('click',function(e){fwBurst(e.clientX,e.clientY)});
   }
 
   /* ---------- Mascot jump (click on laptop, tap on phone/tablet) ---------- */
@@ -288,4 +296,74 @@
       if(e.target.closest&&e.target.closest('a,button,.chip,.btn,.icon-btn')) navigator.vibrate(12);
     });
   }
+
+  /* ---------- Background music player ---------- */
+  (function(){
+    var btn=$('#music'), icon=$('#musicIcon');
+    if(!btn||!MUSIC_FILE) return;
+    var au=null, wantOn=false, fade=null, KEY='bgm';
+    var credit=$('#musicCredit'); if(credit&&MUSIC_CREDIT) credit.textContent=' · '+MUSIC_CREDIT;
+    var ui=function(on){
+      icon.textContent=on?'🎵':'🔇'; btn.classList.toggle('playing',on);
+      btn.setAttribute('aria-label',on?'Pause background music':'Play background music');
+      btn.setAttribute('aria-pressed',on?'true':'false');
+    };
+    var setSaved=function(v){try{localStorage.setItem(KEY,v)}catch(e){}};
+    var ramp=function(to,done){
+      clearInterval(fade);
+      fade=setInterval(function(){
+        var d=to-au.volume;
+        if(Math.abs(d)<.02){au.volume=to;clearInterval(fade);if(done)done();return}
+        au.volume=Math.min(1,Math.max(0,au.volume+(d>0?.02:-.02)));
+      },40);
+    };
+    var make=function(){
+      au=new Audio(MUSIC_FILE); au.loop=true; au.preload='none'; au.volume=0;
+      au.addEventListener('error',function(){btn.hidden=true;wantOn=false}); // file missing -> hide button
+    };
+    var start=function(){
+      if(!au) make();
+      var pr=au.play();
+      if(pr&&pr.then){pr.then(function(){wantOn=true;ui(true);setSaved('on');ramp(MUSIC_VOLUME)}).catch(function(){ui(false)})}
+      else{wantOn=true;ui(true);setSaved('on');ramp(MUSIC_VOLUME)}
+    };
+    var stop=function(){
+      wantOn=false; ui(false); setSaved('off');
+      if(au) ramp(0,function(){au.pause()});
+    };
+    // Autoplay: browsers often block sound until the visitor interacts, so we
+    // 1) try to play right away, 2) if blocked, start on the first tap / click / key.
+    var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
+    var armed=false;
+    var armFirstGesture=function(){
+      if(armed) return; armed=true;
+      var go=function(){
+        document.removeEventListener('pointerdown',go);document.removeEventListener('keydown',go);document.removeEventListener('touchend',go);
+        if(!wantOn && !btn.hidden && !document.hidden) start();
+      };
+      document.addEventListener('pointerdown',go);
+      document.addEventListener('keydown',go);
+      document.addEventListener('touchend',go);
+    };
+    var autoStart=function(){
+      if(saved==='off' || !(MUSIC_AUTOPLAY || saved==='on')) return;   // visitor turned it off before -> respect that
+      if(!au) make();
+      var pr=au.play();
+      if(pr&&pr.then){
+        pr.then(function(){wantOn=true;ui(true);ramp(MUSIC_VOLUME)}).catch(armFirstGesture);
+      } else { armFirstGesture(); }
+    };
+
+    // show the button only when the file really exists, then try to autoplay
+    var probe=new Audio(); probe.preload='metadata';
+    probe.addEventListener('loadedmetadata',function(){btn.hidden=false;autoStart()});
+    probe.addEventListener('error',function(){btn.hidden=true});
+    probe.src=MUSIC_FILE;
+    btn.addEventListener('click',function(e){e.stopPropagation();wantOn?stop():start()});
+    // pause while the tab is hidden
+    document.addEventListener('visibilitychange',function(){
+      if(!au||!wantOn) return;
+      if(document.hidden){au.pause()} else {var p=au.play(); if(p&&p.catch)p.catch(function(){})}
+    });
+  })();
 })();

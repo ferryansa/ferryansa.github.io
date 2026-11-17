@@ -357,3 +357,11 @@ html.has-cursor .mascot{cursor:none}
 
 /* click fireworks canvas */
 #fireworks{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998}
+
+/* background music button */
+#music[hidden]{display:none}
+#music.playing{background:var(--pink);border-color:var(--pink-d)}
+#music.playing #musicIcon{display:inline-block;animation:musicbob 1.2s ease-in-out infinite}
+@keyframes musicbob{50%{transform:translateY(-2px) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){#music.playing #musicIcon{animation:none}}
+
